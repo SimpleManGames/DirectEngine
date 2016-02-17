@@ -109,11 +109,18 @@ int Engine::Draw(Context& context)
 	RENDERER->SetColor(Color(1, 0, 0, 1));
 	Vector2D startPos(200, 200);
 	Vector2D size(100, 100);
-	//RENDERER->DrawRect(startPos, size, 2.0f);
+	RENDERER->DrawRect(startPos, size, 2.0f);
 	RENDERER->DrawCircle(100, 100, 50, 2);
 	tick += 0.5f;
 
-	//GRAPHICSDEVICEMANAGER->GetGraphics()->GetRenderTarget()->SetTransform();
+	Matrix2D c(0, 1, 2, 
+				3, 3, 4, 
+				5, 6, 7);
+	D2D1_MATRIX_3X2_F b = c.ToMatrix3x2F();
+	D2D1_MATRIX_3X2_F d;
+	d = D2D1::Matrix3x2F::Translation(100, 100);
+	auto hotdoog = Matrix2D::CreateTranslationMatrix(100, 100).ToMatrix3x2F();
+	GRAPHICSDEVICEMANAGER->GetGraphics()->GetRenderTarget()->SetTransform(hotdoog);
 
 	graph->EndDraw();
 

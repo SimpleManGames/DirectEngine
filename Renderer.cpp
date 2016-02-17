@@ -71,7 +71,8 @@ void Renderer::FillPolygon(const std::vector<Vector2D> vecPoints, bool close) {
 
 	FillPolygon(points, vecPoints.size(), close);
 }
+// TODO: This
 void Renderer::FillPolygon(Vector2D * points, int size, bool close) {
-
+	
 }
 

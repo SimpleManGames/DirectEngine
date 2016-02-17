@@ -164,8 +164,8 @@ Matrix2D Matrix2D::CreateIdentityMatrix() { return Matrix2D(1, 0, 0, 0, 1, 0, 0,
 Matrix2D Matrix2D::CreateRotationMatrix(double angle)
 {
 	return Matrix2D((float)cos(angle), (float)-sin(angle), 0.0f,
-		(float)sin(angle), (float)cos(angle), 0.0f,
-		0.0f, 0.0f, 1.0f);
+					(float)sin(angle), (float)cos(angle), 0.0f,
+							0.0f, 0.0f, 1.0f);
 }
 
 Matrix2D Matrix2D::CreateScalingMatrix(double scale)
@@ -179,15 +179,15 @@ Matrix2D Matrix2D::CreateScalingMatrix(const Vector2D& scaleXY)
 Matrix2D Matrix2D::CreateScalingMatrix(double scaleX, double scaleY)
 {
 	return Matrix2D((float)scaleX, 0.0f, 0.0f,
-		0.0f, (float)scaleY, 0.0f,
+								0.0f, (float)scaleY, 0.0f,
 		0.0f, 0.0f, 1.0f);
 }
 
 Matrix2D Matrix2D::CreateTranslationMatrix(const Vector2D& origin)
 {
 	return Matrix2D(1.0f, 0.0f, (float)origin.x,
-		0.0f, 1.0f, (float)origin.y,
-		0.0f, 0.0f, 1.0f);
+					0.0f, 1.0f, (float)origin.y,
+					0.0f, 0.0f,				1.0f);
 }
 Matrix2D Matrix2D::CreateTranslationMatrix(double tx, double ty) { return CreateTranslationMatrix(Vector2D(tx, ty)); }
 
@@ -195,7 +195,7 @@ const D2D1_MATRIX_3X2_F& Matrix2D::ToMatrix3x2F()
 {
 	D2D1::Matrix3x2F mat;
 
-	mat._11 = (FLOAT)m[0];
+    mat._11 = (FLOAT)m[0];
 	mat._12 = (FLOAT)m[1];
 	mat._21 = (FLOAT)m[3];
 	mat._22 = (FLOAT)m[4];
