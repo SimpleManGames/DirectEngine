@@ -1,0 +1,176 @@
+#include "Engine.h"
+
+#include "Renderer.h"
+
+#include "System.h"
+#include "Game.h"
+#include "Window.h"
+#include "Graphics.h"
+
+#include "Matrix2D.h"
+
+#include "GraphicsDeviceManager.h"
+
+#ifndef _DELETEMACRO_H
+	#include "deletemacros.h"
+#endif // !_DELETEMACRO_H
+#ifndef _STRING_H
+	#define _STRING_H
+#endif // !_STRING_H
+
+
+static float tick = 0;
+const Matrix2D pos = Matrix2D::CreateTranslationMatrix(100, 100); // TESTING
+const Matrix2D rot = Matrix2D::CreateRotationMatrix(45.0f);
+
+EngineState Engine::m_EngineState = EngineState::Invalid;
+
+Engine::Engine()
+{
+	m_EngineState = EngineState::Constructing;
+}
+
+Engine::~Engine()
+{
+	m_EngineState = EngineState::Destroying;
+}
+
+//Public Methods
+
+int Engine::RunLoop()
+{
+	Context context;
+	context.pRenderer = new Renderer();
+
+	if (!this->Intialize()) { return 0; }
+
+	srand(GetTickCount());
+
+	MSG msg = {};
+
+	m_EngineState = EngineState::Running;
+
+	while (msg.message != WM_QUIT && m_EngineState == EngineState::Running)
+	{
+		CheckResize();
+
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+
+		this->Update(context);
+		this->Draw(context);
+	}
+
+	//Logger::Log("Ending program");
+	//Logger::WriteLogToFile();
+
+	if (!this->ShutDown()) { return 0; }
+
+	return msg.wParam;
+}
+
+//Private Methods
+int Engine::Intialize()
+{
+	m_EngineState = EngineState::Initializing;
+
+	Game* game = CreateGame();
+
+	if (!game) { return false; }
+
+	// Add systems
+	if (!AddSystem(new Window(WindowData(640, 480))))
+		return false;
+
+	if (!AddSystem(new Graphics(GraphicsData(GetSystem<Window>(SystemType::Sys_Window)))))
+		return false;
+
+	// Initialize the system
+	if (!m_mapSystems[SystemType::Sys_Window]->Initialize())
+		return false;
+	if (!m_mapSystems[SystemType::Sys_Graphics]->Initialize())
+		return false;
+
+	GRAPHICSDEVICEMANAGER->SetGraphics(GetSystem<Graphics>(SystemType::Sys_Graphics));
+
+	return true;
+}
+int Engine::Draw(Context& context)
+{
+	Graphics* graph = GetSystem<Graphics>(SystemType::Sys_Graphics);
+	if (graph == nullptr) return false;
+
+	graph->BeginDraw();
+
+	// Draw Game
+	RENDERER->SetColor(Color(1, 0, 0, 1));
+	Vector2D startPos(200, 200);
+	Vector2D size(100, 100);
+	//RENDERER->DrawRect(startPos, size, 2.0f);
+	RENDERER->DrawCircle(100, 100, 50, 2);
+	tick += 0.5f;
+
+	//GRAPHICSDEVICEMANAGER->GetGraphics()->GetRenderTarget()->SetTransform();
+
+	graph->EndDraw();
+
+	return true;
+}
+int Engine::Update(Context& context)
+{
+	for (std::pair<SystemType, System*> pSys : m_mapSystems)
+	{
+		if (!pSys.second)
+			continue;
+
+		pSys.second->Update(context);
+	}
+
+	return true;
+}
+int Engine::ShutDown()
+{
+	m_EngineState = EngineState::ShuttingDown;
+
+	for (std::pair<SystemType, System*> psys : m_mapSystems)
+	{
+		//if (!psys.second->ShutDown())
+		{
+			//Logger::Log("Failed to shutdown systems" + psys->GetSystemType());
+			continue;
+		}
+		SafeDelete(psys.second);
+	}
+	return true;
+}
+
+void Engine::CheckResize() {
+	Window* wnd = GetSystem<Window>(SystemType::Sys_Window);
+	if (wnd && wnd->GetResizeData().mustResize) {
+		Graphics* graph = GetSystem<Graphics>(SystemType::Sys_Graphics);
+		if (graph) {
+			graph->OnResize(wnd->GetResizeData().newWidth, wnd->GetResizeData().newHeight);
+			wnd->GetResizeData().mustResize = false;
+		}
+	}
+}
+
+int Engine::AddSystem(System* psys)
+{
+	auto element = m_mapSystems.insert(std::make_pair(psys->GetType(), psys));
+	if (element.second) { return true; }
+	else return false;
+}
+
+Game* Engine::CreateGame()
+{
+	if (!AddSystem(new Game(GameData()))) { return nullptr; }
+	Game* game = GetSystem<Game>(SystemType::Sys_Game);
+	if (!game) { return nullptr; }
+	if (!game->Initialize()) { return nullptr; }
+
+	return game;
+}
