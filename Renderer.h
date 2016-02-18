@@ -19,10 +19,12 @@
 #ifndef _RECT2D_H
 #include "Rect2D.h"
 #endif // !_RECT2D_H
-
 #ifndef _COLOR_H
 #include "color.h"
 #endif // !_COLOR_H
+#ifndef _DELETEMACROS_H
+#include "deletemacros.h"
+#endif
 
 // Forward Declartion
 //class Image;

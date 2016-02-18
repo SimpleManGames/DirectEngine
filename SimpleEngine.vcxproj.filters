@@ -49,6 +49,9 @@
     <Filter Include="Header Files\Core\Systems\Graphics">
       <UniqueIdentifier>{84caac75-3920-4494-ba5b-d8e8cb3cc79f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Systems\Timer">
+      <UniqueIdentifier>{c5f689a4-6ad1-4b0f-b9c4-afb2d638d934}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -95,6 +98,12 @@
     </ClCompile>
     <ClCompile Include="Vector3D.cpp">
       <Filter>Header Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Header Files\Core\Systems\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineTimer.cpp">
+      <Filter>Header Files\Core\Systems\Timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +169,12 @@
     </ClInclude>
     <ClInclude Include="Vector3D.h">
       <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\Core\Systems\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineTimer.h">
+      <Filter>Header Files\Core\Systems\Timer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

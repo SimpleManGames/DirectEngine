@@ -11,10 +11,10 @@ class Renderer;
 
 struct Context
 {
-	float dTime;
+	float dTime= 0.0f;
 
-	Window* pWnd;
-	Renderer* pRenderer;
+	Window* pWnd = nullptr;
+	Renderer* pRenderer = nullptr;
 };
 
 #endif // !_CONTEXT_H

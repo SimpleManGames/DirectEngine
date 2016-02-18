@@ -7,7 +7,7 @@
 #include "Window.h"
 #include "Graphics.h"
 
-#include "Matrix2D.h"
+#include "EngineTimer.h"
 
 #include "GraphicsDeviceManager.h"
 
@@ -18,22 +18,10 @@
 	#define _STRING_H
 #endif // !_STRING_H
 
-
-static float tick = 0;
-const Matrix2D pos = Matrix2D::CreateTranslationMatrix(100, 100); // TESTING
-const Matrix2D rot = Matrix2D::CreateRotationMatrix(45.0f);
-
 EngineState Engine::m_EngineState = EngineState::Invalid;
 
-Engine::Engine()
-{
-	m_EngineState = EngineState::Constructing;
-}
-
-Engine::~Engine()
-{
-	m_EngineState = EngineState::Destroying;
-}
+Engine::Engine() { m_EngineState = EngineState::Constructing; }
+Engine::~Engine() { m_EngineState = EngineState::Destroying; }
 
 //Public Methods
 
@@ -88,10 +76,14 @@ int Engine::Intialize()
 	if (!AddSystem(new Graphics(GraphicsData(GetSystem<Window>(SystemType::Sys_Window)))))
 		return false;
 
+	if(!AddSystem(new EngineTimer(EngineTimerData())))
+
 	// Initialize the system
 	if (!m_mapSystems[SystemType::Sys_Window]->Initialize())
 		return false;
 	if (!m_mapSystems[SystemType::Sys_Graphics]->Initialize())
+		return false;
+	if (!m_mapSystems[SystemType::Sys_EngineTimer]->Initialize())
 		return false;
 
 	GRAPHICSDEVICEMANAGER->SetGraphics(GetSystem<Graphics>(SystemType::Sys_Graphics));
@@ -111,16 +103,6 @@ int Engine::Draw(Context& context)
 	Vector2D size(100, 100);
 	RENDERER->DrawRect(startPos, size, 2.0f);
 	RENDERER->DrawCircle(100, 100, 50, 2);
-	tick += 0.5f;
-
-	Matrix2D c(0, 1, 2, 
-				3, 3, 4, 
-				5, 6, 7);
-	D2D1_MATRIX_3X2_F b = c.ToMatrix3x2F();
-	D2D1_MATRIX_3X2_F d;
-	d = D2D1::Matrix3x2F::Translation(100, 100);
-	auto hotdoog = Matrix2D::CreateTranslationMatrix(100, 100).ToMatrix3x2F();
-	GRAPHICSDEVICEMANAGER->GetGraphics()->GetRenderTarget()->SetTransform(hotdoog);
 
 	graph->EndDraw();
 

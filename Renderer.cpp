@@ -73,6 +73,43 @@ void Renderer::FillPolygon(const std::vector<Vector2D> vecPoints, bool close) {
 }
 // TODO: This
 void Renderer::FillPolygon(Vector2D * points, int size, bool close) {
-	
+	if (size < 3) return;
+	HRESULT hr;
+
+	ID2D1PathGeometry* pGeometry;
+	hr = GRAPHICSDEVICEMANAGER->GetGraphics()->GetD2DFactory()->CreatePathGeometry(&pGeometry);
+	if (FAILED(hr)) {
+		SafeRelease(pGeometry);
+		//Logger::Log(_T("Failed to create path geometry"), LOGTYPE_WARNING, false);
+		return;
+	}
+
+	// Write to path geometry using the geometry sink
+	ID2D1GeometrySink* pGeometrySink = nullptr;
+	hr = pGeometry->Open(&pGeometrySink);
+	if (FAILED(hr)) {
+		SafeRelease(pGeometrySink);
+		SafeRelease(pGeometry);
+		//Logger::Log(_T("Failed to create geometry sink"), LOGTYPE_WARNING, false);
+		return;
+	}
+
+	if (SUCCEEDED(hr)) {
+		pGeometrySink->BeginFigure(D2D1::Point2F((FLOAT)points[0].x, (FLOAT)points[0].y), D2D1_FIGURE_BEGIN_FILLED);
+
+		for (int i = 0; i < size; ++i) pGeometrySink->AddLine(D2D1::Point2F((FLOAT)points[i].x, (FLOAT)points[i].y));
+
+		pGeometrySink->EndFigure(D2D1_FIGURE_END_CLOSED);
+
+		hr = pGeometrySink->Close();
+		SafeRelease(pGeometrySink);
+	}
+
+	if (SUCCEEDED(hr)) {
+		GRAPHICSDEVICEMANAGER->GetGraphics()->GetRenderTarget()->FillGeometry(pGeometry, GRAPHICSDEVICEMANAGER->GetGraphics()->GetColorBrush());
+		SafeRelease(pGeometry);
+		return;
+	}
+	SafeRelease(pGeometry);
 }
 
