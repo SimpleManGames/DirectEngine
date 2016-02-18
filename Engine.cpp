@@ -76,7 +76,8 @@ int Engine::Intialize()
 	if (!AddSystem(new Graphics(GraphicsData(GetSystem<Window>(SystemType::Sys_Window)))))
 		return false;
 
-	if(!AddSystem(new EngineTimer(EngineTimerData())))
+	if (!AddSystem(new EngineTimer(EngineTimerData())))
+		return false;
 
 	// Initialize the system
 	if (!m_mapSystems[SystemType::Sys_Window]->Initialize())
