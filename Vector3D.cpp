@@ -1,5 +1,7 @@
 #include "Vector3D.h"
 
+Vector3D Vector3D::ZeroVector() { return Vector3D(0.0f, 0.0f, 0.0f); }
+
 double Vector3D::Length() const { return sqrtf((float)x * (float)x + (float)y * (float)y + (float)z * (float)z); }
 double Vector3D::Distance(const Vector3D & vec) const
 {
@@ -33,12 +35,23 @@ bool Vector3D::operator!=(const Vector3D & rhs) const { return (x != rhs.x) || (
 bool Vector3D::operator<(const Vector3D & rhs) const
 {
 	if (x < rhs.x) return true;
-	if (x > rhs.x) return false;
 	if (y < rhs.y) return true;
-	if (y > rhs.y) return false;
 	if (z < rhs.z) return true;
-	if (z > rhs.z) return false;
+	return false;
+}
+
+bool Vector3D::operator>(const Vector3D & rhs) const
+{
+	if (x > rhs.x) return true;
+	if (y > rhs.y) return true;
+	if (z > rhs.z) return true;
 	return false;
 }
 
 Vector3D Vector3D::Cross(const Vector3D &a, const Vector3D &b) { return Vector3D(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.z); }
+
+Vector3D Vector3D::min(const Vector3D & a, const Vector3D & b) { return a < b ? a : b; }
+
+Vector3D Vector3D::max(const Vector3D & a, const Vector3D & b) { return a > b ? a : b; }
+
+Vector3D Vector3D::clamp(const Vector3D & a, const Vector3D & a_min, const Vector3D & a_max) { return max(min(a_min, a_max), a_max); }

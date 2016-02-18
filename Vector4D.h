@@ -20,8 +20,26 @@ public:
 		struct { float s, t, p, q; };
 	};
 public:
-	Vector4D();
+	Vector4D() 
+		: x(0.0f)
+		, y(0.0f)
+		, z(0.0f)
+		, w(0.0f) { }
+	Vector4D(const Vector4D& other) {
+		x = other.x;
+		y = other.y;
+		z = other.z;
+		w = other.w;
+	}
+	Vector4D(double xPos, double yPos, double zPos, double wPos)
+		: x((float)xPos)
+		, y((float)yPos)
+		, z((float)zPos)
+		, w((float)wPos) { }
+	
 	~Vector4D();
+
+	static Vector4D ZeroVector;
 };
 
 #endif // !_VECTOR4D_H

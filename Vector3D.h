@@ -31,7 +31,7 @@ public:
 		, z((float)zPos) {}
 	~Vector3D() {}
 
-	static Vector3D ZeroVector;
+	static Vector3D ZeroVector();
 
 	double       Length() const;                            // length of a vector
 	double       Distance(const Vector3D& vec) const;       // distance between two vectors
@@ -54,12 +54,13 @@ public:
 	bool        operator==(const Vector3D& rhs) const;      // exact compare, no epsilon
 	bool        operator!=(const Vector3D& rhs) const;      // exact compare, no epsilon
 	bool        operator<(const Vector3D& rhs) const;        // comparison for sort
+	bool        operator>(const Vector3D& rhs) const;
 
 	Vector3D Cross(const Vector3D &a, const Vector3D &b);
 
-	Vector3D VectorMin(const Vector3D &a, const Vector3D &b);
-	Vector3D VectorMax(const Vector3D &a, const Vector3D &b);
-	Vector3D VectorClamp(const Vector3D &a, const Vector3D &a_min, const Vector3D &a_max);
+	Vector3D min(const Vector3D &a, const Vector3D &b);
+	Vector3D max(const Vector3D &a, const Vector3D &b);
+	Vector3D clamp(const Vector3D &a, const Vector3D &a_min, const Vector3D &a_max);
 };
 
 
