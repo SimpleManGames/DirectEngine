@@ -5,6 +5,7 @@
 #include "Graphics.h"
 #include "GraphicsDeviceManager.h"
 
+
 Renderer::Renderer() :
 	m_InterpolationMode(D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR)
 	{ }
@@ -26,19 +27,27 @@ void Renderer::DrawLine(float x1, float y1, float x2, float y2, float lineWidth)
 
 	DrawLine(v1, v2, lineWidth);
 }
+void Renderer::DrawLine(const Ray &ray, float lineWidth) { 
+	Vector2D v1(ray.p);
+	Vector2D v2(ray.p + ray.d * ray.l);
+
+	DrawLine(v1, v2, lineWidth);
+}
 
 void Renderer::DrawRect(double left, double top, double width, double height, float lineWidth) { DrawRect(Rect2D(left, top, left + width, top + height), lineWidth); }
 void Renderer::DrawRect(const Vector2D& lefttop, const Vector2D& rightbottom, float lineWidth) { DrawRect(Rect2D(lefttop, rightbottom), lineWidth); }
-void Renderer::DrawRect(const Rect2D& rect, float lineWidth){
+void Renderer::DrawRect(const Rect2D& rect, float lineWidth) {
 	D2D1_RECT_F d2dRect = D2D1::RectF((float)rect.left, (float)rect.top, (float)rect.right, (float)rect.bottom);
 	GRAPHICSDEVICEMANAGER->GetGraphics()->GetRenderTarget()->DrawRectangle(d2dRect, GRAPHICSDEVICEMANAGER->GetGraphics()->GetColorBrush(), lineWidth);
 }
+void Renderer::DrawRect(const AABB& rect, float lineWidth) { DrawRect(Rect2D(rect.minv(), rect.maxv()), lineWidth); }
 
 void Renderer::DrawCircle(double xcenter, double ycenter, double r, float lineWidth) {
 	D2D1_ELLIPSE ellipse = D2D1::Ellipse(D2D1::Point2((FLOAT)xcenter, (FLOAT)ycenter), (FLOAT)r, (FLOAT)r);
 	GRAPHICSDEVICEMANAGER->GetGraphics()->GetRenderTarget()->DrawEllipse(ellipse, GRAPHICSDEVICEMANAGER->GetGraphics()->GetColorBrush(), lineWidth);
 }
 void Renderer::DrawCircle(const Vector2D & center, double r, float lineWidth) { DrawCircle(center.x, center.y, lineWidth); }
+void Renderer::DrawCircle(const Circle &cir, float lineWidth) { DrawCircle(cir.p.x, cir.p.y, cir.r, lineWidth); }
 
 void Renderer::DrawPolygon(const std::vector<Vector2D> vecPoints, bool close, float lineWidth) {
 	Vector2D* points = new Vector2D[(int)vecPoints.size()];
@@ -58,12 +67,14 @@ void Renderer::FillRect(const Rect2D& rect){
 	D2D1_RECT_F d2dRect = D2D1::RectF((float)rect.left, (float)rect.top, (float)rect.right, (float)rect.bottom);
 	GRAPHICSDEVICEMANAGER->GetGraphics()->GetRenderTarget()->FillRectangle(d2dRect, GRAPHICSDEVICEMANAGER->GetGraphics()->GetColorBrush());
 }
+void Renderer::FillRect(const AABB& rect) { FillRect(Rect2D(rect.minv(), rect.maxv())); }
 
 void Renderer::FillCircle(const Vector2D & center, double r) { FillCircle(center.x, center.y, r); }
 void Renderer::FillCircle(double xcenter, double ycenter, double r) {
 	D2D1_ELLIPSE ellipse = D2D1::Ellipse(D2D1::Point2((FLOAT)xcenter, (FLOAT)ycenter), (FLOAT)r, (FLOAT)r);
 	GRAPHICSDEVICEMANAGER->GetGraphics()->GetRenderTarget()->FillEllipse(ellipse, GRAPHICSDEVICEMANAGER->GetGraphics()->GetColorBrush());
 }
+void Renderer::FillCircle(const Circle& cir) { FillCircle(cir.p.x, cir.p.y, cir.r); }
 
 void Renderer::FillPolygon(const std::vector<Vector2D> vecPoints, bool close) {
 	Vector2D* points = new Vector2D[(int)vecPoints.size()];
@@ -71,7 +82,6 @@ void Renderer::FillPolygon(const std::vector<Vector2D> vecPoints, bool close) {
 
 	FillPolygon(points, vecPoints.size(), close);
 }
-// TODO: This
 void Renderer::FillPolygon(Vector2D * points, int size, bool close) {
 	if (size < 3) return;
 	HRESULT hr;

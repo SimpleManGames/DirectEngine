@@ -111,7 +111,7 @@ Vector3D Matrix3D::GetScale() const
 	return Vector3D(m[0], m[5], m[10]);
 }
 
-double Matrix3D::GetRotation()
+double Matrix3D::GetRotation() const
 {
 	if ((m[1] != (-1 * m[4])) || (m[5] != m[0]))
 		return -1.0;

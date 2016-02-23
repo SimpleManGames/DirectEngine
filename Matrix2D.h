@@ -6,17 +6,19 @@
 #ifndef _VECTOR3D_H
 #include "Vector3D.h"
 #endif
+
 #ifndef _2DUTILL_H
 #include "d2dutill.h"
 #endif
 
 __declspec(align(32)) class Matrix2D
 {
+public:
 	union
 	{
-		Vector3D c[3];
 		float m[9];
 		float mm[3][3];
+		Vector3D c[3];
 		struct
 		{
 			union { Vector3D c1; Vector2D right; };
@@ -41,7 +43,7 @@ public:
 
 	Vector2D GetTranslation() const;
 	Vector2D GetScale() const;
-	double GetRotation();
+	double GetRotation() const;
 
 	// operators
 	Matrix2D     operator+(const Matrix2D& rhs) const;      // add rhs
@@ -49,6 +51,7 @@ public:
 	Matrix2D&    operator+=(const Matrix2D& rhs);           // add rhs and update this object
 	Matrix2D&    operator-=(const Matrix2D& rhs);           // subtract rhs and update this object
 	Matrix2D     operator*(const Matrix2D& rhs) const;      // multiplication: M3 = M1 * M2
+	Vector3D	 operator*(const Matrix2D & _A, const Vector3D & b);
 	Matrix2D&    operator*=(const Matrix2D& rhs);           // multiplication: M1' = M1 * M2
 
 	bool        operator==(const Matrix2D& rhs) const;      // exact compare, no epsilon

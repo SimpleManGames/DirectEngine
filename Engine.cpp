@@ -11,6 +11,10 @@
 
 #include "GraphicsDeviceManager.h"
 
+#include "Shape.h" // TESTING
+#include "Transform.h"
+#include "Collider.h"
+
 #ifndef _DELETEMACRO_H
 	#include "deletemacros.h"
 #endif // !_DELETEMACRO_H
@@ -99,11 +103,32 @@ int Engine::Draw(Context& context)
 	graph->BeginDraw();
 
 	// Draw Game
-	RENDERER->SetColor(Color(1, 0, 0, 1));
-	Vector2D startPos(200, 200);
-	Vector2D size(100, 100);
-	RENDERER->DrawRect(startPos, size, 2.0f);
-	RENDERER->DrawCircle(100, 100, 50, 2);
+	
+	Vector2D pos1(200, 200);
+	Vector2D pos2(250, 200);
+
+	Transform p1;
+	Transform p2;
+
+	Circle c1 = { pos1, (float)50 };
+	Circle c2 = { pos2, (float)50 };
+
+	p1.setPosition(pos1);
+	p1.setScale({ 1000, 1000 });
+	p2.setPosition(pos2);
+	p2.setScale({ 1000, 1000 });
+
+
+	if (EvaluateCollision(p1, Collider(Collider::e_CIRCLE), p2, Collider(Collider::e_CIRCLE)).isOverlap) {
+		RENDERER->SetColor(Color(0, 1, 0, 1));
+	}
+	else
+		RENDERER->SetColor(Color(1, 0, 0, 1));
+
+	RENDERER->FillCircle(c1);
+	RENDERER->FillCircle(c2);
+
+
 
 	graph->EndDraw();
 

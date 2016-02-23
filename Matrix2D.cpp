@@ -4,6 +4,7 @@
 #include <unordered_set>
 #endif
 
+
 Matrix2D::Matrix2D() { Identity(); }
 Matrix2D::Matrix2D(float m0, float m1, float m2, float m3, float m4, float m5, float m6, float m7, float m8) {
 	m[0] = m0; m[1] = m1; m[2] = m2;
@@ -76,7 +77,7 @@ Matrix2D Matrix2D::Invert()
 
 Vector2D Matrix2D::GetTranslation() const { return Vector2D(m[2], m[5]); }
 Vector2D Matrix2D::GetScale() const { return Vector2D(m[0], m[4]); }
-double Matrix2D::GetRotation()
+double Matrix2D::GetRotation() const
 {
 	if ((m[1] != (-1 * m[3])) || (m[4] != m[0]))
 		return -1.0;
@@ -129,6 +130,17 @@ Matrix2D Matrix2D::operator*(const Matrix2D& rhs) const
 		m[1] * rhs[6] + m[4] * rhs[7] + m[7] * rhs[8],
 		m[2] * rhs[6] + m[5] * rhs[7] + m[8] * rhs[8]);
 }
+Vector3D Matrix2D::operator*(const Matrix2D &_A, const Vector3D &b)
+{
+	Matrix2D A = _A.transpose();
+	Vector3D r;
+
+	r.x = Vector3D::Dot(A.c[0], b);
+	r.y = Vector3D::Dot(A.c[1], b);
+	r.z = Vector3D::Dot(A.c[2], b);
+
+	return r;
+}
 Matrix2D& Matrix2D::operator*=(const Matrix2D& rhs)
 {
 	*this = *this * rhs;
@@ -148,8 +160,8 @@ bool Matrix2D::operator!=(const Matrix2D& rhs) const
 		(m[6] != rhs[6]) || (m[7] != rhs[7]) || (m[8] != rhs[8]);
 }
 
-float Matrix2D::operator[](int index) const { return m[index]; }
-float& Matrix2D::operator[](int index) { return m[index]; }
+float Matrix2D::operator[](int index) const { return c[index]; }
+float& Matrix2D::operator[](int index) { return c[index]; }
 
 Matrix2D& Matrix2D::operator=(const Matrix2D& other)
 {
@@ -194,7 +206,7 @@ Matrix2D Matrix2D::CreateTranslationMatrix(double tx, double ty) { return Create
 const D2D1_MATRIX_3X2_F& Matrix2D::ToMatrix3x2F()
 {
 	D2D1::Matrix3x2F mat;
-
+	
     mat._11 = (FLOAT)m[0];
 	mat._12 = (FLOAT)m[1];
 	mat._21 = (FLOAT)m[3];

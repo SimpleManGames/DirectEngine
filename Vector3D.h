@@ -36,8 +36,12 @@ public:
 	double       Length() const;                            // length of a vector
 	double       Distance(const Vector3D& vec) const;       // distance between two vectors
 	double       Dot(const Vector3D& vec) const;            // dot product
+	static double Dot(const Vector3D& a, const Vector3D& b);
 	Vector3D&    Normalize();                               // normalized vector
+	static Vector3D	 Normal(const Vector3D &a);
 	float		 Magnitude();
+	Vector3D	 Reflect(const Vector3D &v, const Vector3D &a);
+	Vector3D	 Project(const Vector3D &b);
 															// operators
 	Vector3D     operator-()const;                          // unary operator (negate)
 	Vector3D     operator+(const Vector3D& rhs) const;      // add rhs
@@ -53,14 +57,14 @@ public:
 
 	bool        operator==(const Vector3D& rhs) const;      // exact compare, no epsilon
 	bool        operator!=(const Vector3D& rhs) const;      // exact compare, no epsilon
-	bool        operator<(const Vector3D& rhs) const;        // comparison for sort
+	bool        operator<(const Vector3D& rhs) const;       // comparison for sort
 	bool        operator>(const Vector3D& rhs) const;
 
 	Vector3D Cross(const Vector3D &a, const Vector3D &b);
 
-	Vector3D min(const Vector3D &a, const Vector3D &b);
-	Vector3D max(const Vector3D &a, const Vector3D &b);
-	Vector3D clamp(const Vector3D &a, const Vector3D &a_min, const Vector3D &a_max);
+	static Vector3D minv(const Vector3D &a, const Vector3D &b);
+	static Vector3D maxv(const Vector3D &a, const Vector3D &b);
+	static Vector3D clampv(const Vector3D &a, const Vector3D &a_min, const Vector3D &a_max);
 };
 
 

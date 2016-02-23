@@ -52,6 +52,12 @@
     <Filter Include="Header Files\Core\Systems\Timer">
       <UniqueIdentifier>{c5f689a4-6ad1-4b0f-b9c4-afb2d638d934}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Math\Shapes">
+      <UniqueIdentifier>{698015c0-ae82-433e-8b72-dbf5ee77544e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components">
+      <UniqueIdentifier>{7c441f93-e6c7-4fd9-9662-d06a60061394}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -59,9 +65,6 @@
     </ClCompile>
     <ClCompile Include="System.cpp">
       <Filter>Header Files\Core\Systems\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine.cpp">
-      <Filter>Header Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="UObject.cpp">
       <Filter>Header Files\SceneGraph\Base</Filter>
@@ -105,6 +108,21 @@
     <ClCompile Include="EngineTimer.cpp">
       <Filter>Header Files\Core\Systems\Timer</Filter>
     </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Header Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Header Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Header Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>Header Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Header Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinMain.h">
@@ -124,9 +142,6 @@
     </ClInclude>
     <ClInclude Include="System.h">
       <Filter>Header Files\Core\Systems\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine.h">
-      <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="UObject.h">
       <Filter>Header Files\SceneGraph\Base</Filter>
@@ -175,6 +190,21 @@
     </ClInclude>
     <ClInclude Include="EngineTimer.h">
       <Filter>Header Files\Core\Systems\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

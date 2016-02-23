@@ -44,7 +44,7 @@ public:
 
 	Vector3D GetTranslation() const;
 	Vector3D GetScale() const;
-	double GetRotation();
+	double GetRotation() const;
 
 	// operators
 	Matrix3D     operator+(const Matrix3D& rhs) const;      // add rhs
