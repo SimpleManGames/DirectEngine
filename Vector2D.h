@@ -7,7 +7,7 @@
 #endif
 
 
-__declspec(align(32)) struct Vector2D
+/*__declspec(align(32))*/ struct Vector2D
 {
 	union
 	{
@@ -62,6 +62,7 @@ public:
 	bool        operator==(const Vector2D& rhs) const;      // exact compare, no epsilon
 	bool        operator!=(const Vector2D& rhs) const;      // exact compare, no epsilon
 	bool        operator<(const Vector2D& rhs) const;        // comparison for sort
+	bool        operator>(const Vector2D& rhs) const;        // comparison for sort
 
 	float &operator[](unsigned idx) { return v[idx]; }
 	float  operator[](unsigned idx) const { return v[idx]; }

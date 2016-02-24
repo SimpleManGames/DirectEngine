@@ -50,6 +50,8 @@ bool Vector2D::operator==(const Vector2D& rhs) const { return (x == rhs.x) && (y
 bool Vector2D::operator!=(const Vector2D& rhs) const { return (x != rhs.x) || (y != rhs.y); }
 bool Vector2D::operator<(const Vector2D& rhs) const { return (x < rhs.x && y < rhs.y) ? true : false; }
 
+bool Vector2D::operator>(const Vector2D & rhs) const { return (x > rhs.x && y > rhs.y) ? true : false; }
+
 Vector2D Vector2D::minv(const Vector2D & a, const Vector2D & b) { return (a.x < b.x && a.y < b.y) ? a : b; }
 Vector2D Vector2D::maxv(const Vector2D & a, const Vector2D & b) { return (a.x < b.x && a.y < b.y) ? b : a; }
 Vector2D Vector2D::clampv(const Vector2D & a, const Vector2D & a_min, const Vector2D & a_max) { return minv(maxv(a, a_min), a_max); }

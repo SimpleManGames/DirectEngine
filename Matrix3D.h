@@ -6,12 +6,14 @@
 #ifndef _VECTOR4D_H
 #include "Vector4D.h"
 #endif
+#include "Vector3D.h"
 #ifndef _2DUTILL_H
 #include "d2dutill.h"
 #endif
 
-__declspec(align(32)) class Matrix3D
+/*__declspec(align(32))*/ class Matrix3D
 {
+public:
 	union
 	{
 		float m[16];
@@ -71,7 +73,7 @@ public:
 	static Matrix3D CreateTranslationMatrix(const Vector3D& origin);        // Instantiate a translation matrix
 	static Matrix3D CreateTranslationMatrix(double tx, double ty, double tz);          // Instantiate a translation matrix
 
-	//const D2D1_MATRIX_3X2_F& Matrix3D::ToMatrix3x2F();
+	const D2D1_MATRIX_3X2_F& Matrix3D::ToMatrix3x2F();
 private:
 	static const int MAXNUMBER = 16;
 

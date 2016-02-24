@@ -15,6 +15,8 @@
 #include "deletemacros.h"
 #endif
 
+#include <iostream>
+
 // Foward Declaration
 class Timer;
 

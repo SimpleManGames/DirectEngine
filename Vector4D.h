@@ -1,12 +1,10 @@
 #ifndef _VECTOR4D_H
 #define _VECTOR4D_H
 
-#ifndef _VECTOR3D_H
 #include "Vector3D.h"
-#endif // _VECTOR3D_H
 
 
-__declspec(align(32)) class Vector4D
+/*__declspec(align(32))*/ class Vector4D
 {
 public:
 	union
@@ -37,7 +35,7 @@ public:
 		, z((float)zPos)
 		, w((float)wPos) { }
 	
-	~Vector4D();
+	~Vector4D() { }
 
 	static Vector4D ZeroVector;
 };

@@ -12,9 +12,7 @@ Matrix2D::Matrix2D(float m0, float m1, float m2, float m3, float m4, float m5, f
 	m[6] = m6; m[7] = m7; m[8] = m8;
 }
 
-Matrix2D::Matrix2D(const Matrix2D & other) {
-	*this = other;
-}
+Matrix2D::Matrix2D(const Matrix2D & other) { *this = other; }
 
 Matrix2D::~Matrix2D() {
 	if(this == NULL)
@@ -115,8 +113,7 @@ Matrix2D& Matrix2D::operator-=(const Matrix2D& rhs)
 	return *this;
 }
 
-Matrix2D Matrix2D::operator*(const Matrix2D& rhs) const
-{
+Matrix2D Matrix2D::operator*(const Matrix2D& rhs) const {
 	return Matrix2D(
 		m[0] * rhs[0] + m[3] * rhs[1] + m[6] * rhs[2],
 		m[1] * rhs[0] + m[4] * rhs[1] + m[7] * rhs[2],
@@ -130,41 +127,26 @@ Matrix2D Matrix2D::operator*(const Matrix2D& rhs) const
 		m[1] * rhs[6] + m[4] * rhs[7] + m[7] * rhs[8],
 		m[2] * rhs[6] + m[5] * rhs[7] + m[8] * rhs[8]);
 }
-Vector3D Matrix2D::operator*(const Matrix2D &_A, const Vector3D &b)
-{
-	Matrix2D A = _A.transpose();
-	Vector3D r;
-
-	r.x = Vector3D::Dot(A.c[0], b);
-	r.y = Vector3D::Dot(A.c[1], b);
-	r.z = Vector3D::Dot(A.c[2], b);
-
-	return r;
-}
-Matrix2D& Matrix2D::operator*=(const Matrix2D& rhs)
-{
+Matrix2D& Matrix2D::operator*=(const Matrix2D& rhs) {
 	*this = *this * rhs;
 	return *this;
 }
 
-bool Matrix2D::operator==(const Matrix2D& rhs) const
-{
+bool Matrix2D::operator==(const Matrix2D& rhs) const {
 	return (m[0] == rhs[0]) && (m[1] == rhs[1]) && (m[2] == rhs[2]) &&
 		(m[3] == rhs[3]) && (m[4] == rhs[4]) && (m[5] == rhs[5]) &&
 		(m[6] == rhs[6]) && (m[7] == rhs[7]) && (m[8] == rhs[8]);
 }
-bool Matrix2D::operator!=(const Matrix2D& rhs) const
-{
+bool Matrix2D::operator!=(const Matrix2D& rhs) const {
 	return (m[0] != rhs[0]) || (m[1] != rhs[1]) || (m[2] != rhs[2]) ||
 		(m[3] != rhs[3]) || (m[4] != rhs[4]) || (m[5] != rhs[5]) ||
 		(m[6] != rhs[6]) || (m[7] != rhs[7]) || (m[8] != rhs[8]);
 }
 
-float Matrix2D::operator[](int index) const { return c[index]; }
-float& Matrix2D::operator[](int index) { return c[index]; }
+float Matrix2D::operator[](int index) const { return m[index]; }
+float& Matrix2D::operator[](int index) { return m[index]; }
 
-Matrix2D& Matrix2D::operator=(const Matrix2D& other)
-{
+Matrix2D& Matrix2D::operator=(const Matrix2D& other) {
 	for (int i = 0; i < MAXNUMBER; ++i)
 		this->m[i] = other.m[i];
 
@@ -173,33 +155,26 @@ Matrix2D& Matrix2D::operator=(const Matrix2D& other)
 
 Matrix2D Matrix2D::CreateIdentityMatrix() { return Matrix2D(1, 0, 0, 0, 1, 0, 0, 0, 1); }
 
-Matrix2D Matrix2D::CreateRotationMatrix(double angle)
-{
+Matrix2D Matrix2D::CreateRotationMatrix(double angle) {
 	return Matrix2D((float)cos(angle), (float)-sin(angle), 0.0f,
-					(float)sin(angle), (float)cos(angle), 0.0f,
-							0.0f, 0.0f, 1.0f);
+					(float)sin(angle), (float)cos(angle) , 0.0f,
+								 0.0f,				 0.0f, 1.0f);
 }
 
-Matrix2D Matrix2D::CreateScalingMatrix(double scale)
-{
-	return CreateScalingMatrix(scale, scale);
-}
-Matrix2D Matrix2D::CreateScalingMatrix(const Vector2D& scaleXY)
-{
-	return CreateScalingMatrix(scaleXY.x, scaleXY.y);
-}
+Matrix2D Matrix2D::CreateScalingMatrix(double scale) { return CreateScalingMatrix(scale, scale); }
+Matrix2D Matrix2D::CreateScalingMatrix(const Vector2D& scaleXY) { return CreateScalingMatrix(scaleXY.x, scaleXY.y); }
 Matrix2D Matrix2D::CreateScalingMatrix(double scaleX, double scaleY)
 {
-	return Matrix2D((float)scaleX, 0.0f, 0.0f,
-								0.0f, (float)scaleY, 0.0f,
-		0.0f, 0.0f, 1.0f);
+	return Matrix2D((float)scaleX,          0.0f, 0.0f,
+							 0.0f, (float)scaleY, 0.0f,
+							 0.0f,			0.0f, 1.0f);
 }
 
 Matrix2D Matrix2D::CreateTranslationMatrix(const Vector2D& origin)
 {
-	return Matrix2D(1.0f, 0.0f, (float)origin.x,
-					0.0f, 1.0f, (float)origin.y,
-					0.0f, 0.0f,				1.0f);
+	return Matrix2D(		   1.0f,			0.0f, 0.0f,
+							   0.0f,			1.0f, 0.0f,
+					(float)origin.x, (float)origin.y, 1.0f);
 }
 Matrix2D Matrix2D::CreateTranslationMatrix(double tx, double ty) { return CreateTranslationMatrix(Vector2D(tx, ty)); }
 

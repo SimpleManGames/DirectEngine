@@ -67,7 +67,7 @@ void Renderer::FillRect(const Rect2D& rect){
 	D2D1_RECT_F d2dRect = D2D1::RectF((float)rect.left, (float)rect.top, (float)rect.right, (float)rect.bottom);
 	GRAPHICSDEVICEMANAGER->GetGraphics()->GetRenderTarget()->FillRectangle(d2dRect, GRAPHICSDEVICEMANAGER->GetGraphics()->GetColorBrush());
 }
-void Renderer::FillRect(const AABB& rect) { FillRect(Rect2D(rect.minv(), rect.maxv())); }
+void Renderer::FillRect(const AABB& rect) { FillRect(Rect2D(rect)); }
 
 void Renderer::FillCircle(const Vector2D & center, double r) { FillCircle(center.x, center.y, r); }
 void Renderer::FillCircle(double xcenter, double ycenter, double r) {

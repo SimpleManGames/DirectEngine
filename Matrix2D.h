@@ -11,7 +11,7 @@
 #include "d2dutill.h"
 #endif
 
-__declspec(align(32)) class Matrix2D
+/*__declspec(align(32))*/ class Matrix2D
 {
 public:
 	union
@@ -51,7 +51,6 @@ public:
 	Matrix2D&    operator+=(const Matrix2D& rhs);           // add rhs and update this object
 	Matrix2D&    operator-=(const Matrix2D& rhs);           // subtract rhs and update this object
 	Matrix2D     operator*(const Matrix2D& rhs) const;      // multiplication: M3 = M1 * M2
-	Vector3D	 operator*(const Matrix2D & _A, const Vector3D & b);
 	Matrix2D&    operator*=(const Matrix2D& rhs);           // multiplication: M1' = M1 * M2
 
 	bool        operator==(const Matrix2D& rhs) const;      // exact compare, no epsilon

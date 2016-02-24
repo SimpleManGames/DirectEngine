@@ -101,18 +101,9 @@ Matrix3D Matrix3D::Invert()
 	return matInverse;
 }
 
-Vector3D Matrix3D::GetTranslation() const
-{
-	return Vector3D(m[3], m[7], m[11]);
-}
-
-Vector3D Matrix3D::GetScale() const
-{
-	return Vector3D(m[0], m[5], m[10]);
-}
-
-double Matrix3D::GetRotation() const
-{
+Vector3D Matrix3D::GetTranslation() const { return Vector3D(m[3], m[7], m[11]); }
+Vector3D Matrix3D::GetScale() const { return Vector3D(m[0], m[5], m[10]); }
+double Matrix3D::GetRotation() const {
 	if ((m[1] != (-1 * m[4])) || (m[5] != m[0]))
 		return -1.0;
 	else
@@ -208,15 +199,8 @@ bool Matrix3D::operator!=(const Matrix3D & rhs) const
 
 }
 
-float Matrix3D::operator[](int index) const
-{
-	return m[index];
-}
-
-float & Matrix3D::operator[](int index)
-{
-	return m[index];
-}
+float Matrix3D::operator[](int index) const { return m[index]; }
+float & Matrix3D::operator[](int index) { return m[index]; }
 
 Matrix3D & Matrix3D::operator=(const Matrix3D & other)
 {

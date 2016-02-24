@@ -1,4 +1,6 @@
 #include "Vector3D.h"
+#include "Matrix3D.h"
+#include "Matrix2D.h"
 
 Vector3D Vector3D::ZeroVector() { return Vector3D(0.0f, 0.0f, 0.0f); }
 
@@ -8,7 +10,7 @@ double Vector3D::Distance(const Vector3D & vec) const
 	return sqrtf(((float)vec.x - (float)x)*((float)vec.x - (float)x) + ((float)vec.y - (float)y)*((float)vec.y - (float)y) + ((float)vec.z - (float)z)*((float)vec.z - (float)z));
 }
 double Vector3D::Dot(const Vector3D & vec) const { return (x * vec.x + y * vec.y + z * vec.z); }
-double Vector3D::Dot(const Vector3D & a, const Vector3D & b) { return (a.x * b.x + a.y * b.y + a.z * b.z) }
+double Vector3D::Dot(const Vector3D & a, const Vector3D & b) { return (a.x * b.x + a.y * b.y + a.z * b.z); }
 Vector3D& Vector3D::Normalize()
 {
 	double xxyyzz = x * x + y * y + z * z;
@@ -52,6 +54,16 @@ Vector3D & Vector3D::operator*=(const double scale) { x *= (float)scale; y *= (f
 Vector3D & Vector3D::operator*=(const Vector3D & rhs) { x *= rhs.x; y *= rhs.y; z *= rhs.z; return *this; }
 Vector3D Vector3D::operator/(const double scale) const { return Vector3D(x / scale, y / scale, z / scale); }
 Vector3D & Vector3D::operator/=(const double scale) { x /= (float)scale; y /= (float)scale; z /= (float)scale; return *this; }
+Vector3D Vector3D::operator*(const Matrix3D & a) {
+	return Vector3D((x * a.mm[0][0]) + (y * a.mm[1][0]) + (z * a.mm[2][0]),
+					(x * a.mm[0][1]) + (y * a.mm[1][1]) + (z * a.mm[2][1]),
+					(x * a.mm[0][2]) + (y * a.mm[1][2]) + (z * a.mm[2][2]));
+}
+Vector3D Vector3D::operator*(const Matrix2D & a) {
+	return Vector3D((x * a.mm[0][0]) + (y * a.mm[1][0]) + (z * a.mm[2][0]), 
+					(x * a.mm[0][1]) + (y * a.mm[1][1]) + (z * a.mm[2][1]), 
+					(x * a.mm[0][2]) + (y * a.mm[1][2]) + (z * a.mm[2][2]));
+}
 bool Vector3D::operator==(const Vector3D & rhs) const { return (x == rhs.x) && (y == rhs.y) && (z == rhs.z); }
 bool Vector3D::operator!=(const Vector3D & rhs) const { return (x != rhs.x) || (y != rhs.y) || (z != rhs.z); }
 bool Vector3D::operator<(const Vector3D & rhs) const { return (x < rhs.x && y < rhs.y && z < rhs.z) ? true : false; }

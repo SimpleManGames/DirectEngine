@@ -33,9 +33,9 @@ Matrix2D Transform::getGlobalTransform() const
 	return
 		(e_parent ? e_parent->getGlobalTransform()
 			: Matrix2D::CreateIdentityMatrix())
-		* Matrix2D::CreateTranslationMatrix(position)
-		* Matrix2D::CreateScalingMatrix(scale)
-		* Matrix2D::CreateRotationMatrix(angle);
+			* Matrix2D::CreateTranslationMatrix(position)
+			* Matrix2D::CreateScalingMatrix(scale)
+			* Matrix2D::CreateRotationMatrix(angle);
 }
 
 void Transform::setPosition(const Vector2D &a_position) { position = a_position; }

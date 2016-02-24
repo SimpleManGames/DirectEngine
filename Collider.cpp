@@ -3,11 +3,27 @@
 
 Collider::Collider() : shape(e_CIRCLE), circle({ { 0,0 },1 }) { }
 
-Collider::Collider(SHAPE s) : shape(s) { }
+/**
+*   \ brief Collider Construtor
+*	  Defines a shape collider with their corrisponding values
+*   \ param s Shape Type (Collider::e_SHAPETYPE)
+*	\ param pos Position of the collider
+*	\ param dne Direction - Normal - Half Extents
+*	\ param lr Length - Radius
+**/
+Collider::Collider(SHAPE s)
+	: shape(s)
+{ }
+
 
 Collider::Collider(const Collider & other) {
 	*this = other;
 }
+
+void Collider::SetCircle(Vector2D &pos, float &r) { circle = { pos, r }; }
+void Collider::SetAABB(Vector2D &pos, Vector2D &e) { aabb = { pos, e }; }
+void Collider::SetRay(Vector2D &pos, Vector2D &d, float &l) { ray = { pos, d, l }; }
+void Collider::SetPlane(Vector2D &pos, Vector2D &normal) { plane = { pos, normal }; }
 
 CollisionData EvaluateCollision(const Transform &at, const Collider &ac,
 	const Transform &bt, const Collider &bc)

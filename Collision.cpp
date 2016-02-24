@@ -8,9 +8,10 @@ CollisionData CheckCollision(const AABB   & a, const AABB   & b) {
 	return CollisionData{ collide };
 }
 CollisionData CheckCollision(const AABB   & a, const Circle & b) {
-	Vector2D pc = Vector2D::clampv(a.p, a.minv(), a.maxv());
-	bool collide = Vector2D::Dot((a.p - pc), (a.p - pc)) <= b.r;
-	return CollisionData{ collide };
+	/*Vector2D pc = Vector2D::clampv(b.p, a.minv(), a.maxv());
+	bool collide = Vector2D::Dot((b.p - pc), (a.p - pc)) <= b.r;
+	return CollisionData{ collide };*/
+	return CheckCollision(Circle{ clamp<Vector2D>(b.p, a.minv(), a.maxv()), 0 }, b);
 }
 CollisionData CheckCollision(const AABB   & a, const Ray    & b)
 {

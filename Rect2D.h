@@ -1,9 +1,8 @@
 #ifndef _RECT2D_H
 #define _RECT2D_H
 
-#ifndef _VECTOR2D_H
 #include "Vector2D.h"
-#endif
+#include "Shape.h"
 
 //------------------------------------------------------------------------------
 // Rect2D Struct
@@ -38,12 +37,20 @@ public:
 		width = right - left;
 		height = bottom - top;
 	}
-
 	Rect2D(const Vector2D& v1, const Vector2D& v2)
 		: top(v1.y)
 		, left(v1.x)
 		, bottom(v2.y)
 		, right(v2.x)
+	{
+		width = right - left;
+		height = bottom - top;
+	}
+	Rect2D(const AABB &rect) 
+		: top(rect.p.y - rect.e.y)
+		, left(rect.p.x - rect.e.x)
+		, right(rect.p.x + rect.e.x)
+		, bottom(rect.p.y + rect.e.y)
 	{
 		width = right - left;
 		height = bottom - top;

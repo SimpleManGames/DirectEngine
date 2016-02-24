@@ -3,7 +3,7 @@
 
 #include "Vector2D.h"
 
-__declspec(align(32)) class Vector3D
+/*__declspec(align(32))*/ class Vector3D
 {
 public:
 	union
@@ -54,6 +54,8 @@ public:
 	Vector3D&    operator*=(const Vector3D& rhs);           // multiply each element and update this object
 	Vector3D     operator/(const double scale) const;       // inverse scale
 	Vector3D&    operator/=(const double scale);            // scale and update this object
+	Vector3D	 operator*(const class Matrix3D & a);
+	Vector3D	 operator*(const class Matrix2D & a);
 
 	bool        operator==(const Vector3D& rhs) const;      // exact compare, no epsilon
 	bool        operator!=(const Vector3D& rhs) const;      // exact compare, no epsilon
