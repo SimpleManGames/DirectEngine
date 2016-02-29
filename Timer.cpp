@@ -90,7 +90,7 @@ bool Timer::ShutDown()
 }
 
 float Timer::GetTotalTimer() {
-	if (m_bStopped) return (float)(m_StopTime - m_BaseTime) * m_SecondsPerCount;
+	if (m_bStopped) return (float)(m_StopTime - m_BaseTime) * (float)m_SecondsPerCount;
 	else return (float)(((m_CurrTime - m_PauseTime) - m_BaseTime) * m_SecondsPerCount);
 }
 

@@ -63,7 +63,7 @@ int Engine::RunLoop()
 
 	if (!this->ShutDown()) { return 0; }
 
-	return msg.wParam;
+	return (int)msg.wParam;
 }
 
 //Private Methods

@@ -25,8 +25,8 @@ public:
 		y = other.y;
 	}
 	Vector2D(double xPos, double yPos)
-		: x(xPos)
-		, y(yPos)
+		: x((float)xPos)
+		, y((float)yPos)
 	{}
 	~Vector2D()
 	{}

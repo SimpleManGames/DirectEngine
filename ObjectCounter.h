@@ -14,6 +14,6 @@ private:
 };
 
 template<typename T>
-unsigned long ObjectCount<T>::objectAmount = 0;
+unsigned long ObjectCounter<T>::objectAmount = 0;
 
 #endif // !_OBJECTCOUNTER_H

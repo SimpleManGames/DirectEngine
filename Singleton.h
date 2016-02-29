@@ -49,7 +49,7 @@ void Singleton<T>::CreateInstance() {
 
 template<typename T>
 void Singleton<T>::DestoryInstance() {
-	SafeDelete(Singletone<T>::instance);
+	SafeDelete(Singleton<T>::instance);
 }
 
 #endif // !_SINGLETON_H

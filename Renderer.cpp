@@ -53,7 +53,7 @@ void Renderer::DrawPolygon(const std::vector<Vector2D> vecPoints, bool close, fl
 	Vector2D* points = new Vector2D[(int)vecPoints.size()];
 	for (int i = 0; i < (int)vecPoints.size(); ++i) points[i] = vecPoints[i];
 
-	DrawPolygon(points, vecPoints.size(), close, lineWidth);
+	DrawPolygon(points, (int)vecPoints.size(), close, lineWidth);
 }
 void Renderer::DrawPolygon(Vector2D * points, int size, bool close, float lineWidth) {
 	if (size < 3) return;
@@ -80,7 +80,7 @@ void Renderer::FillPolygon(const std::vector<Vector2D> vecPoints, bool close) {
 	Vector2D* points = new Vector2D[(int)vecPoints.size()];
 	for (int i = 0; i < (int)vecPoints.size(); ++i) points[i] = vecPoints[i];
 
-	FillPolygon(points, vecPoints.size(), close);
+	FillPolygon(points, (int)vecPoints.size(), close);
 }
 void Renderer::FillPolygon(Vector2D * points, int size, bool close) {
 	if (size < 3) return;

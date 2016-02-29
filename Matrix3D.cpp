@@ -49,7 +49,7 @@ Matrix3D Matrix3D::Transpose()
 Matrix3D Matrix3D::Invert()
 {
 	float determinant, invDeterminant;
-	float tmp[9];
+	float tmp[16];
 
 	#pragma region Math
 
@@ -230,8 +230,8 @@ Matrix3D Matrix3D::CreateScalingMatrix(const Vector3D & scaleXYZ) { return Creat
 Matrix3D Matrix3D::CreateTranslationMatrix(const Vector3D & origin) { return CreateTranslationMatrix((double)origin.x, (double)origin.y, (double)origin.z); } 
 Matrix3D Matrix3D::CreateTranslationMatrix(double tx, double ty, double tz)
 {
-	return Matrix3D(1.0f, 0.0f, 0.0f, tx,
-		0.0f, 1.0f, 0.0f, ty,
-		0.0f, 0.0f, 1.0f, tz,
+	return Matrix3D(1.0f, 0.0f, 0.0f, (float)tx,
+		0.0f, 1.0f, 0.0f, (float)ty,
+		0.0f, 0.0f, 1.0f, (float)tz,
 		0.0f, 0.0f, 0.0f, 1.0f);
 }
