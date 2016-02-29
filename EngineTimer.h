@@ -23,7 +23,7 @@ class Timer;
 // Struct
 struct EngineTimerData : public SystemData {
 	EngineTimerData() :
-		SystemData(SystemType::Sys_EngineTimer) { }
+		SystemData(_T("Engine Timer"), SystemType::Sys_EngineTimer) { }
 
 };
 

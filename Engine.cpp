@@ -93,7 +93,8 @@ int Engine::Intialize()
 	if (!m_mapSystems[SystemType::Sys_EngineTimer]->Initialize())
 		return false;
 
-	GRAPHICSDEVICEMANAGER->SetGraphics(GetSystem<Graphics>(SystemType::Sys_Graphics));
+	Singleton<GraphicsDeviceManager>::CreateInstance();
+	Singleton<GraphicsDeviceManager>::GetInstance()->SetGraphics(GetSystem<Graphics>(SystemType::Sys_Graphics));
 
 	return true;
 }
@@ -105,33 +106,6 @@ int Engine::Draw(Context& context)
 	graph->BeginDraw();
 
 	// Draw Game
-	
-	RENDERER->SetColor(Color(0, 0, 0, 1));
-
-	Vector2D pos1(150, 150);
-	Vector2D pos2(235, 235);
-
-	Transform p1;
-	Transform p2;
-
-	Circle c1 = { { 0, 0 }, (float)50 };
-	AABB c2 =	{ { 0, 0 }, { 50, 50 } };
-
-	p1.setPosition(pos1);
-	//p1.setScale({ 1.0f, 1.0f });
-	p2.setPosition(pos2);
-	//p2.setScale({ 1.0f, 1.0f});
-	
-	Collider cc1 = Collider(Collider::e_CIRCLE);
-	Collider cc2 = Collider(Collider::e_AABB);
-	cc1.SetCircle(Vector2D(0, 0), c1.r);
-	cc2.SetAABB(Vector2D(0, 0), Vector2D(50, 50));
-
-	if (EvaluateCollision(p1, cc1, p2, cc2).isOverlap) { RENDERER->SetColor(Color(0, 1, 0, 1)); }
-	else RENDERER->SetColor(Color(1, 0, 0, 1));
-
-	RENDERER->FillCircle(p1.getGlobalTransform() * c1);
-	RENDERER->FillRect(p2.getGlobalTransform() * c2);
 
 	graph->EndDraw();
 

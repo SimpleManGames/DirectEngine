@@ -3,7 +3,7 @@
 //#include "Logger.h"
 
 WindowData::WindowData()
-	:SystemData(SystemType::Sys_Invalid)
+	:SystemData(_T(""), SystemType::Sys_Invalid)
 	, width(-1)
 	, height(-1)
 	, bits(-1)
@@ -12,7 +12,7 @@ WindowData::WindowData()
 {
 }
 WindowData::WindowData(int w, int h, const std::tstring& title, int b, bool fs)
-	:SystemData(SystemType::Sys_Window)
+	:SystemData(_T("Window"), SystemType::Sys_Window)
 	, width(w)
 	, height(h)
 	, bits(b)

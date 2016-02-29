@@ -12,7 +12,7 @@
 #endif
 
 Timer::Timer(const std::tstring& name) : 
-	UObject(name),
+	BaseObject(name),
 	m_SecondsPerCount(0.0f),
 	m_DeltaTime(-1.0f),
 	m_BaseTime(0),
@@ -41,7 +41,7 @@ Timer::Timer(const Timer & other)
 
 bool Timer::Initialize()
 {
-	UObject::Initialize();
+	BaseObject::Initialize();
 
 	Start();
 
@@ -49,12 +49,12 @@ bool Timer::Initialize()
 }
 
 bool Timer::PostInitialize() {
-	return UObject::PostInitialize();
+	return BaseObject::PostInitialize();
 }
 
 bool Timer::Update(Context & context)
 {
-	UObject::Update(context);
+	BaseObject::Update(context);
 
 	if (m_bStopped) {
 		m_DeltaTime = 0.0f;
@@ -82,7 +82,7 @@ bool Timer::Update(Context & context)
 
 bool Timer::ShutDown()
 {
-	UObject::ShutDown();
+	BaseObject::ShutDown();
 
 	Stop();
 

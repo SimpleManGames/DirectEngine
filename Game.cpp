@@ -3,11 +3,21 @@
 
 
 Game::Game(const GameData& data)
-	: System(SystemType::Sys_Game)
+	: System(data)
 {
 }
 
 
 Game::~Game()
+{
+}
+
+GameData::GameData()
+	: SystemData(_T("Game"), SystemType::Sys_Game)
+{
+}
+
+GameData::GameData(const std::tstring & name)
+	: SystemData(name, SystemType::Sys_Game)
 {
 }

@@ -6,15 +6,52 @@
 	#include "Context.h"
 #endif
 #ifndef _STRING_H
-	#include "string.h"
+	#include "string.h" 
 #endif
+#ifndef _OBJECTCOUNTER_H
+	#include "ObjectCounter.h"
+#endif // !_OBJECTCOUNTER_H
+#ifndef _SINGLETON_H
+	#include "Singleton.h"
+#endif // !_SINGLETON_H
+#ifndef _TYPECHECKER_H
+	#include "TypeChecker.h"
+#endif // !_TYPECHECKER_H
 
-class UObject
+// Struct
+struct ObjectData {
+	ObjectData() 
+		: name(_T(""))
+	{}
+	ObjectData(const std::tstring& n) 
+		: name(n)
+	{}
+
+	//void* operator new(size_t size);
+	//void operator delete(void * pdelete);
+
+	std::tstring name;
+};
+
+// Define
+// Register type inside typechecker
+#define TYPE_REGISTER(class_type_id)\
+	Singleton<TypeChecker>::GetInstance(true)->AddType(GetID(), _T(#class_type_id))
+// Init class type hardcode methods
+#define TYPE_INIT(class_type_id)\
+	static const std:tstring GetClassTypeID() { return _T(#class_type_id); }\
+	virtual const std::tstring GetTypeID() const { return _T(#class_type_id); }
+
+
+class BaseObject : public ObjectCounter<BaseObject>
 {
+	TYPE_INIT(BaseObject);
+
 public:
-	UObject();
-	UObject(const std::tstring& name);
-	virtual ~UObject();
+	BaseObject();
+	BaseObject(ObjectData* data);
+	BaseObject(const std::tstring& name);
+	virtual ~BaseObject();
 
 	//void* operator new(size_t size);
 	//void operator delete(void* pdelete);
@@ -51,8 +88,17 @@ public:
 	void Deactivate() { m_bIsActivated = false; }
 	bool IsActivate() { return m_bIsActivated; }
 
+	template<typename T>
+	T* GetObjectData() { return static_cast<T*>(m_pdata); }
+
+	ObjectData* GetRawObjectData() { return m_pdata; }
+
+	int GetID() { return m_ID; }
+	int GetObjectAmount() { return ObjectCounter<BaseObject>::GetAmount(); }
+	bool isType(const std::tstring& type);
+	bool isA(const std::tstring& type);
+
 protected:
-	static int m_ObjAmount;
 	int m_ID;
 
 	bool m_bIsInitialized;
@@ -62,6 +108,8 @@ protected:
 	bool m_bIsPostContentLoaded;
 
 	std::tstring m_Name;
+
+	ObjectData* m_pdata;
 
 private:
 	bool m_bIsActivated;

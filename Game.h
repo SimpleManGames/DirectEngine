@@ -6,7 +6,8 @@
 // Structs
 struct GameData : public SystemData
 {
-
+	GameData();
+	GameData(const std::tstring& name);
 };
 
 class Game : public System
