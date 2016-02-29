@@ -36,20 +36,17 @@ template <typename T>
 T* Singleton<T>::instance = nullptr;
 
 template <typename T>
-T* Singleton<T>::GetInstance(bool create) {
+T* Singleton<T>::GetInstance(bool create) 
+{
 	if (create) { Singleton<T>::CreateInstance(); }
 	assert(Singleton<T>::instance != nullptr);
 	return instance;
 }
 
 template<typename T>
-void Singleton<T>::CreateInstance() {
-	if (Singleton<T>::instance == nullptr) Singleton<T>::instance = new T();
-}
+void Singleton<T>::CreateInstance() { if (Singleton<T>::instance == nullptr) Singleton<T>::instance = new T(); }
 
 template<typename T>
-void Singleton<T>::DestoryInstance() {
-	SafeDelete(Singleton<T>::instance);
-}
+void Singleton<T>::DestoryInstance() { SafeDelete(Singleton<T>::instance); }
 
 #endif // !_SINGLETON_H

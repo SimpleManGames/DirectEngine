@@ -10,6 +10,7 @@ WindowData::WindowData()
 	, windowTitle(_T(""))
 	, fullscreen(false)
 {
+
 }
 WindowData::WindowData(int w, int h, const std::tstring& title, int b, bool fs)
 	:SystemData(_T("Window"), SystemType::Sys_Window)
@@ -114,6 +115,7 @@ Window::Window(const WindowData& data)
 }
 Window::~Window()
 {
+	// TO DO: Deconstrutor
 }
 
 bool Window::Initialize()

@@ -11,10 +11,6 @@
 
 #include "GraphicsDeviceManager.h"
 
-#include "Shape.h" // TESTING
-#include "Transform.h"
-#include "Collider.h"
-
 #include <iostream>
 
 #ifndef _DELETEMACRO_H
@@ -129,7 +125,7 @@ int Engine::ShutDown()
 
 	for (std::pair<SystemType, System*> psys : m_mapSystems)
 	{
-		//if (!psys.second->ShutDown())
+		if (!psys.second->ShutDown())
 		{
 			//Logger::Log("Failed to shutdown systems" + psys->GetSystemType());
 			continue;

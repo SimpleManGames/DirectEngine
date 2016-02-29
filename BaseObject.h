@@ -41,9 +41,6 @@ struct ObjectData {
 #define TYPE_INIT(class_type_id)\
 	virtual std::tstring GetTypeID() const { return _T(#class_type_id); }\
 	static  std::tstring GetClassTypeID()  { return _T(#class_type_id); }
-	
-
-class BaseObject;
 
 class BaseObject : public ObjectCounter<BaseObject>
 {

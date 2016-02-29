@@ -3,27 +3,27 @@
 
 // C Runtime Header Files
 #ifndef _WINDOWS_H
-#include <Windows.h>
+	#include <Windows.h>
 #endif
 #ifndef _VECTOR_
-#include <vector>
+	#include <vector>
 #endif
 
 // Additional Include Files
 #ifndef _VECTOR2D_H
-#include "Vector2D.h"
+	#include "Vector2D.h"
 #endif
 #ifndef _MATRIX2D_H
-#include "Matrix2D.h"
+	#include "Matrix2D.h"
 #endif // !_MATRIX2D_H
 #ifndef _RECT2D_H
-#include "Rect2D.h"
+	#include "Rect2D.h"
 #endif // !_RECT2D_H
 #ifndef _COLOR_H
-#include "color.h"
+	#include "color.h"
 #endif // !_COLOR_H
 #ifndef _DELETEMACROS_H
-#include "deletemacros.h"
+	#include "deletemacros.h"
 #endif
 
 #include "Shape.h"

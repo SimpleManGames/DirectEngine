@@ -11,15 +11,15 @@
 #include <ctime>
 #endif
 
-Timer::Timer(const std::tstring& name) : 
-	BaseObject(name),
-	m_SecondsPerCount(0.0f),
-	m_DeltaTime(-1.0f),
-	m_BaseTime(0),
-	m_PauseTime(0),
-	m_PrevTime(0),
-	m_CurrTime(0),
-	m_bStopped(false)
+Timer::Timer(const std::tstring& name) 
+	: BaseObject(name)
+	, m_SecondsPerCount(0.0f)
+	, m_DeltaTime(-1.0f)
+	, m_BaseTime(0)
+	, m_PauseTime(0)
+	, m_PrevTime(0)
+	, m_CurrTime(0)
+	, m_bStopped(false)
 {
 	__int64 countpersec;
 	QueryPerformanceFrequency((LARGE_INTEGER*)&countpersec);
@@ -48,9 +48,7 @@ bool Timer::Initialize()
 	return true;
 }
 
-bool Timer::PostInitialize() {
-	return BaseObject::PostInitialize();
-}
+bool Timer::PostInitialize() { return BaseObject::PostInitialize(); }
 
 bool Timer::Update(Context & context)
 {
@@ -89,14 +87,16 @@ bool Timer::ShutDown()
 	return true;
 }
 
-float Timer::GetTotalTimer() {
+float Timer::GetTotalTimer() 
+{
 	if (m_bStopped) return (float)(m_StopTime - m_BaseTime) * (float)m_SecondsPerCount;
 	else return (float)(((m_CurrTime - m_PauseTime) - m_BaseTime) * m_SecondsPerCount);
 }
 
 float Timer::GetDeltaTime() { return (float)m_DeltaTime; }
 
-void Timer::Reset() {
+void Timer::Reset() 
+{
 	__int64 currtime;
 	QueryPerformanceCounter((LARGE_INTEGER*)&currtime);
 
@@ -107,7 +107,8 @@ void Timer::Reset() {
 	m_bStopped = false;
 }
 
-void Timer::Start() {
+void Timer::Start() 
+{
 	__int64 starttime;
 	QueryPerformanceCounter((LARGE_INTEGER*)&starttime);
 	m_PrevTime = starttime;
@@ -129,7 +130,8 @@ void Timer::Start() {
 	}
 }
 
-void Timer::Stop() {
+void Timer::Stop() 
+{
 	// IF we are already stopped, then don't do anything
 	if (m_bStopped) return;
 
