@@ -55,7 +55,7 @@ bool Graphics::ShutDown()
 
 	SafeRelease(m_pD2DFactory);
 	SafeRelease(m_pColorBrush);
-	SafeRelease(m_pImageFactory);
+	//SafeRelease(m_pImageFactory);
 	SafeRelease(m_pRenderTarget);
 
 	return true;

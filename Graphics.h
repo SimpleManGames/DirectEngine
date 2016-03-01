@@ -65,28 +65,40 @@ protected:
 
 	/// Methods
 
+	// Inits the Graphics Class
 	bool Initialize();
+	// Shut down the Graphics Class
 	bool ShutDown();
 
 private:
-	// Methods
+	/// Methods
 	//void* operator new(size_t size);
 	//void operator delete(void* pdelete);
 
+	// Create a independent Factory and returns it
 	HRESULT CreateDeviceIndependentResources();
+	// Create a dependent Render Target and sets the default values then returns it
 	HRESULT CreateDeviceDependentResoures();
 
+	// Deletes the Render Target
 	void DiscardDeviceResources();
-
+	// Begins the Draw
 	void BeginDraw();
+	// Ends the Draw
 	HRESULT EndDraw();
 
-	// Members
+	/// Members
+	
+	// Gets the Render Target
 	ID2D1HwndRenderTarget* m_pRenderTarget;
+	// Gets the Image Factory
 	IWICImagingFactory* m_pImageFactory;
+	// Get the Color Brush
 	ID2D1SolidColorBrush* m_pColorBrush;
+	// Gets the Direct2D Factory
 	ID2D1Factory* m_pD2DFactory;
 
+	// The current window
 	Window* m_pWindow;
 };
 

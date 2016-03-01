@@ -18,11 +18,16 @@
 	#include "TypeChecker.h"
 #endif // !_TYPECHECKER_H
 
-// Struct
+/// Struct
+
+// Holds the data for each BaseObject
 struct ObjectData {
+	// Default ObjectData Construtor
 	ObjectData() 
 		: name(_T(""))
 	{}
+	// ObjectData Construtor
+	// param: n = The name for the object data
 	ObjectData(const std::tstring& n) 
 		: name(n)
 	{}
@@ -30,6 +35,7 @@ struct ObjectData {
 	//void* operator new(size_t size);
 	//void operator delete(void * pdelete);
 
+	// Name of the object data
 	std::tstring name;
 };
 
@@ -40,14 +46,20 @@ struct ObjectData {
 // Init class type hardcode methods
 #define TYPE_INIT(class_type_id)\
 	virtual std::tstring GetTypeID() const { return _T(#class_type_id); }\
-	static  std::tstring GetClassTypeID()  { return _T(#class_type_id); }
+	static std::tstring GetClassTypeID()  { return _T(#class_type_id); }
 
 class BaseObject : public ObjectCounter<BaseObject>
 {
+	// Init Type Checker
 	TYPE_INIT(BaseObject)
 
 public:
+	/// Construtor & Deconstrutor
+
+	// Default BaseObject Construtor
 	BaseObject();
+	// BaseObject Construtor
+	// param: data = takes the name and sets the ObjectData Name
 	BaseObject(ObjectData* data);
 	BaseObject(const std::tstring& name);
 	virtual ~BaseObject();
@@ -55,15 +67,15 @@ public:
 	//void* operator new(size_t size);
 	//void operator delete(void* pdelete);
 
-	virtual bool Initialize()						{ m_bIsInitialized = true; return true; }
-	virtual bool PostInitialize()					{m_bIsPostInitialized = true; return true; }
-	virtual bool LoadContent()						{ m_bIsContentLoaded = true; return true; }
-	virtual bool PostLoadContent()					{m_bIsPostContentLoaded = true; return true; }
-	virtual bool Update(Context& context)			{ return true; }
-	//virtual bool LateUpdate(Context& context)		{ return true; }
-	virtual bool Draw(Context& context)				{ return true; }
-	virtual bool DrawUI(Context& context)			{ return true; }
-	virtual bool ShutDown()							{ return true; }
+	virtual bool Initialize() { m_bIsInitialized = true; return true; }
+	virtual bool PostInitialize() {m_bIsPostInitialized = true; return true; }
+	virtual bool LoadContent() { m_bIsContentLoaded = true; return true; }
+	virtual bool PostLoadContent() {m_bIsPostContentLoaded = true; return true; }
+	virtual bool Update(Context& context) { return true; }
+	//virtual bool LateUpdate(Context& context) { return true; }
+	virtual bool Draw(Context& context)	{ return true; }
+	virtual bool DrawUI(Context& context) { return true; }
+	virtual bool ShutDown()	{ return true; }
 
 	virtual void Reset();
 

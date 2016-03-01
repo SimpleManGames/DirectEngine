@@ -11,6 +11,10 @@
 
 #include "GraphicsDeviceManager.h"
 
+#include "Collider.h"
+#include "Collision.h"
+#include "Shape.h"
+
 #include <iostream>
 
 #ifndef _DELETEMACRO_H
@@ -102,6 +106,25 @@ int Engine::Draw(Context& context)
 	graph->BeginDraw();
 
 	// Draw Game
+
+	Circle c1 = { { 100, 100 }, 20 };
+	AABB c2 = { { 120, 100 }, { 20, 20 } };
+	Collider cc1 = (Collider::e_CIRCLE);
+	cc1.SetCircle(c1);
+	Collider cc2 = (Collider::e_AABB);
+	cc1.SetAABB(c2);
+	Transform tc1;
+	tc1.setPosition(c1.p);
+	Transform tc2;
+	tc2.setPosition(c2.p);
+
+	if (CheckCollision(c1, c2).isOverlap) RENDERER->SetColor(1, 0, 0, 1);
+	else RENDERER->SetColor(0, 0, 1, 1);
+
+
+
+	RENDERER->FillCircle(tc1.getPosition(), c1.r);
+	RENDERER->FillRect(tc2.getPosition(), c2.e);
 
 	graph->EndDraw();
 
