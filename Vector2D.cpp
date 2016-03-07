@@ -21,7 +21,7 @@ float Vector2D::Magnitude() { return sqrtf(x * x + y * y); }
 float Vector2D::Angle() { return atan2(x, y); }
 Vector2D Vector2D::Reflect(const Vector2D & v, const Vector2D &a) {
 	Vector2D n = Normal(a);
-	float co = -2 * (v.Dot(n) / (n.Magnitude() * n.Magnitude()));
+	float co = -2 * ((float)v.Dot(n) / (n.Magnitude() * n.Magnitude()));
 	Vector2D r = {};
 	r.x = v.x + co * n.x;
 	r.y = r.y + co * n.y;

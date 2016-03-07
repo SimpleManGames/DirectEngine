@@ -5,7 +5,6 @@
 #include "Collision.h"
 #include "Transform.h"
 
-// Shapes!
 class Collider
 {
 public:
@@ -26,7 +25,9 @@ public:
 	ConvexHull chull;
 
 	void SetCircle(Vector2D &pos, float &r);
+	void SetCircle(Circle a) { SetCircle(a.p, a.r); }
 	void SetAABB(Vector2D &pos, Vector2D &e);
+	void SetAABB(AABB a) { SetAABB(a.p, a.e); }
 	void SetRay(Vector2D &pos, Vector2D &d, float &l);
 	void SetPlane(Vector2D &pos, Vector2D &normal);
 };

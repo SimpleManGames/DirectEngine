@@ -2,10 +2,10 @@
 #include "Vector2D.h"
 
 Transform::Transform()
-	: e_parent(nullptr),
-	scale({ 1,1 }),
-	position({ 0,0 }),
-	angle(0) { }
+	: e_parent(nullptr)
+	, scale({ 1,1 })
+	, position({ 0,0 })
+	, angle(0) { }
 Transform::~Transform()
 {
 	auto t = e_children;

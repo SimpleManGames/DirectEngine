@@ -2,10 +2,10 @@
 #define _TIMER_H
 
 // Include Files
-#include "UObject.h"
+#include "BaseObject.h"
 
 class Timer :
-	public UObject
+	public BaseObject
 {
 public:
 	// Constructor

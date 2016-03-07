@@ -1,13 +1,13 @@
 #ifndef _SYSTEM_H
 	#define _SYSTEM_H
-#include "UObject.h"
+#include "BaseObject.h"
 
 //Additional Includes
 #ifndef _CONTEXT_H
 	#include "Context.h"
 #endif
 
-// Enumeration
+/// Enumeration
 enum SystemType
 {
 	Sys_Invalid,
@@ -20,31 +20,50 @@ enum SystemType
 	System_MAX
 };
 
-//Structs
-struct SystemData
+///Structs
+struct SystemData : public ObjectData
 {
-	SystemData();
-	SystemData(const SystemType& type);
+	/// Construtors
+
+	// The Default construtor for SystemData
+	SystemData(); 
+	// Construtor for SystemData 
+	// Takes a tstring for a name for the SystemData to be called 
+	// Takes SystemType to set the type of SystemData
+	SystemData(const std::tstring& name, const SystemType& type);
 	
+	/// Varibles
+
+	// Holds the type of the system
 	SystemType systemType;
 };
 
-class System : public UObject
+class System : public BaseObject
 {
+	/// Declarations
 	friend class Engine;
 
 public:
+	/// Getters
+
+	// Returns the type of the system
 	SystemType GetType() { return m_SystemType; }
 
 protected:
+	// Private Constructors
 	System(const SystemData& data);
 	virtual ~System();
-
-	virtual bool Initialize()				{ return UObject::Initialize(); }
-	virtual bool Update(Context& context)	{ return UObject::Update(context); }
-	virtual bool ShutDown()					{ return UObject::ShutDown(); }
+	// Inits the Base Object
+	virtual bool Initialize()				{ return BaseObject::Initialize(); }
+	// Updates the Base Object
+	virtual bool Update(Context& context)	{ return BaseObject::Update(context); }
+	// Shuts down the Base Object
+	virtual bool ShutDown()					{ return BaseObject::ShutDown(); }		
 
 protected:
+	/// Member varibles
+	
+	// Holds the System Type
 	SystemType m_SystemType;
 };
 

@@ -3,16 +3,17 @@
 //#include "Logger.h"
 
 WindowData::WindowData()
-	:SystemData(SystemType::Sys_Invalid)
+	:SystemData(_T(""), SystemType::Sys_Invalid)
 	, width(-1)
 	, height(-1)
 	, bits(-1)
 	, windowTitle(_T(""))
 	, fullscreen(false)
 {
+
 }
 WindowData::WindowData(int w, int h, const std::tstring& title, int b, bool fs)
-	:SystemData(SystemType::Sys_Window)
+	:SystemData(_T("Window"), SystemType::Sys_Window)
 	, width(w)
 	, height(h)
 	, bits(b)
@@ -45,7 +46,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lparam)
 		// the CREATESTRUCT containes the " this " pointer from the CreateWindow method
 		// the " this " pointer of our app is stored in the createstruct pcs->lpCreateParams
 		CREATESTRUCT* pCS = (CREATESTRUCT*)lparam;
-		SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG)pCS->lpCreateParams);
+		SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)pCS->lpCreateParams);
 	}
 	else
 	{
@@ -114,6 +115,7 @@ Window::Window(const WindowData& data)
 }
 Window::~Window()
 {
+	// TO DO: Deconstrutor
 }
 
 bool Window::Initialize()
@@ -205,7 +207,7 @@ bool Window::Initialize()
 		PFD_SUPPORT_OPENGL |                        // Format Must Support OpenGL
 		PFD_DOUBLEBUFFER,                           // Must Support Double Buffering
 		PFD_TYPE_RGBA,                              // Request An RGBA Format
-		m_Bits,                                     // Select Our Color Depth
+		(BYTE)m_Bits,                               // Select Our Color Depth
 		0, 0, 0, 0, 0, 0,                           // Color Bits Ignored
 		0,                                          // No Alpha Buffer
 		0,                                          // Shift Bit Ignored

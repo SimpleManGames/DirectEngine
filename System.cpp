@@ -1,19 +1,27 @@
 #include "System.h"
 
+// Default SystemData Construtor
 SystemData::SystemData()
-	:systemType(SystemType::Sys_Invalid)
-{}
-SystemData::SystemData(const SystemType& type)
-	:systemType(type)
+	: ObjectData()
+	, systemType(SystemType::Sys_Invalid)
 {}
 
+// SystemData Construtor
+// param: name = The name of the system
+// param: type = Sets the SystemType
+SystemData::SystemData(const std::tstring& name, const SystemType& type)
+	: ObjectData(name)
+	, systemType(type)
+{}
+
+// Default System Construtor
+// param: data = Get systemType from this and sets the SystemType
 System::System(const SystemData& data)
-	:UObject(),
+	:BaseObject(),
 	m_SystemType(data.systemType)
 {
 }
 
-
-System::~System()
-{
-}
+// Default System Deconstrutor
+// Empty
+System::~System() { }

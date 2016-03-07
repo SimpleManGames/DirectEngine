@@ -5,13 +5,14 @@
 
 #include "Timer.h"
 
-EngineTimer::EngineTimer(const EngineTimerData& data) : 
-	System(data),
-	m_pWorldTimer(nullptr) { }
+EngineTimer::EngineTimer(const EngineTimerData& data) 
+	: System(data)
+	, m_pWorldTimer(nullptr) { }
 
 EngineTimer::~EngineTimer() { }
 
-bool EngineTimer::Initialize() {
+bool EngineTimer::Initialize() 
+{
 	System::Initialize();
 
 	m_pWorldTimer = new Timer(_T("WorldTimer"));
@@ -33,7 +34,8 @@ bool EngineTimer::Initialize() {
 	return true;
 }
 
-bool EngineTimer::Update(Context & context) {
+bool EngineTimer::Update(Context & context) 
+{
 	System::Update(context);
 
 	if (m_pWorldTimer) {
@@ -45,7 +47,8 @@ bool EngineTimer::Update(Context & context) {
 	return true;
 }
 
-bool EngineTimer::ShutDown() {
+bool EngineTimer::ShutDown() 
+{
 	System::ShutDown();
 
 	SafeDelete(m_pWorldTimer);

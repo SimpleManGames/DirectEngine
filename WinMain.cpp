@@ -10,10 +10,22 @@
 #ifndef _DELETEMACRO_H
 	#include "deletemacros.h"
 #endif // !_DELETEMACRO_H
+#ifndef _SINGLETON_H
+	#include "Singleton.h"
+#endif // !_SINGLETON_H
+#ifndef _TYPECHECKER_H
+	#include "TypeChecker.h"
+#endif // !_TYPECHECKER_H
+#ifndef _GRAPHICSDEVICEMANAGER_H
+	#include "GraphicsDeviceManager.h"
+#endif // !_GRAPHICSDEVICEMANAGER_H
+
+
 
 
 #if defined (DEBUG) | defined(_DEBUG)
-int _tmain(int argc, char* argv[]) {
+int _tmain(int argc, char* argv[]) 
+{
 	UNREFERENCED_PARAMETER(argc);
 	UNREFERENCED_PARAMETER(argv);
 
@@ -46,7 +58,14 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	//Kick of the game
 	int result = pEngine->RunLoop();
 
+	// Delete the engine
 	SafeDelete(pEngine);
+
+	// Destory the Graphic Manager
+	Singleton<GraphicsDeviceManager>::DestoryInstance();
+
+	// Destory singletons
+	Singleton<TypeChecker>::DestoryInstance();
 
 	return result;
 }

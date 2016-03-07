@@ -6,13 +6,13 @@
 
 // Additional Include Files
 #ifndef _VECTOR_
-#include <vector>
+	#include <vector>
 #endif
 #ifndef _STRING_
-#include "string.h"
+	#include "string.h"
 #endif
 #ifndef _DELETEMACROS_H
-#include "deletemacros.h"
+	#include "deletemacros.h"
 #endif
 
 #include <iostream>
@@ -21,14 +21,14 @@
 class Timer;
 
 // Struct
-struct EngineTimerData : public SystemData {
-	EngineTimerData() :
-		SystemData(SystemType::Sys_EngineTimer) { }
-
+struct EngineTimerData : public SystemData
+{
+	EngineTimerData() 
+		:	SystemData(_T("Engine Timer")
+		, SystemType::Sys_EngineTimer) { }
 };
 
-class EngineTimer :
-	public System
+class EngineTimer : public System
 {
 	friend class Engine;
 public:
