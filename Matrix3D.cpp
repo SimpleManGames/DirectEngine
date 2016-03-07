@@ -49,7 +49,7 @@ Matrix3D Matrix3D::Transpose()
 Matrix3D Matrix3D::Invert()
 {
 	float determinant, invDeterminant;
-	float tmp[9];
+	float tmp[16];
 
 	#pragma region Math
 
