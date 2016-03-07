@@ -11,10 +11,6 @@
 
 #include "GraphicsDeviceManager.h"
 
-#include "Collider.h"
-#include "Collision.h"
-#include "Shape.h"
-
 #include <iostream>
 
 #ifndef _DELETEMACRO_H
@@ -98,6 +94,10 @@ int Engine::Intialize()
 
 	return true;
 }
+
+#include "Circle.h"
+#include "Rect2D.h"
+
 int Engine::Draw(Context& context)
 {
 	Graphics* graph = GetSystem<Graphics>(SystemType::Sys_Graphics);
@@ -107,24 +107,46 @@ int Engine::Draw(Context& context)
 
 	// Draw Game
 
-	Circle c1 = { { 100, 100 }, 20 };
-	AABB c2 = { { 120, 100 }, { 20, 20 } };
-	Collider cc1 = (Collider::e_CIRCLE);
-	cc1.SetCircle(c1);
-	Collider cc2 = (Collider::e_AABB);
-	cc1.SetAABB(c2);
-	Transform tc1;
-	tc1.setPosition(c1.p);
-	Transform tc2;
-	tc2.setPosition(c2.p);
+	/*Rect2D r1({ 100, 100 }, { 200, 200 });
+	Rect2D r2({ 150, 150 }, { 250, 250 });
 
-	if (CheckCollision(c1, c2).isOverlap) RENDERER->SetColor(1, 0, 0, 1);
-	else RENDERER->SetColor(0, 0, 1, 1);
+	if(r1.vsRect2D(r2))
+		RENDERER->SetColor(1, 0, 0, 1);
+	else 
+		RENDERER->SetColor(0, 1, 0, 1);
 
+	RENDERER->FillRect(r1);
+	RENDERER->FillRect(r2);
 
+	Circle c1(200, 200, 50);
+	Circle c2(100, 100, 50);
 
-	RENDERER->FillCircle(tc1.getPosition(), c1.r);
-	RENDERER->FillRect(tc2.getPosition(), c2.e);
+	if (c1.vsCircle(c2))
+		RENDERER->SetColor(1, 0, 0, 1);
+	else 
+		RENDERER->SetColor(0, 1, 0, 1);
+
+	RENDERER->FillCircle(c1);
+	RENDERER->FillCircle(c2);*/
+
+	Rect2D r1({ 100, 100 }, { 200, 200 });
+	Circle c1(190, 190, 50);
+
+	if(r1.vsCircle(c1))
+		RENDERER->SetColor(1, 0, 0, 1);
+	else
+		RENDERER->SetColor(0, 1, 0, 1);
+
+	RENDERER->FillRect(r1);
+	//RENDERER->FillCircle(c1);
+
+	RENDERER->DrawCircle(r1.top, r1.right, 5.0f);
+	//RENDERER->DrawCircle(r1.bottom, r1.right, 5.0f);
+	//RENDERER->DrawCircle(r1.top, r1.left, 5.0f);
+	RENDERER->DrawCircle(r1.bottom, r1.left, 5.0f);
+
+	RENDERER->DrawCircle(r1.min, 5.f);
+	RENDERER->DrawCircle(r1.max, 5.f);
 
 	graph->EndDraw();
 

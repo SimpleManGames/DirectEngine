@@ -2,7 +2,7 @@
 #define _TRANSFORM_H
 
 #include "Vector2D.h"
-#include "Matrix2D.h"
+#include "Matrix3.h"
 
 #include <list>
 
@@ -19,7 +19,7 @@ public:
 	~Transform();
 
 	//Matrix4 version to use with drawing.
-	Matrix2D getGlobalTransform() const;
+	Matrix3 getGlobalTransform() const;
 
 	void setParent(Transform *);
 	void setPosition(const Vector2D &);

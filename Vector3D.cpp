@@ -1,6 +1,6 @@
 #include "Vector3D.h"
-#include "Matrix3D.h"
-#include "Matrix2D.h"
+#include "Matrix4.h"
+#include "Matrix3.h"
 
 Vector3D Vector3D::ZeroVector() { return Vector3D(0.0f, 0.0f, 0.0f); }
 
@@ -54,12 +54,12 @@ Vector3D & Vector3D::operator*=(const double scale) { x *= (float)scale; y *= (f
 Vector3D & Vector3D::operator*=(const Vector3D & rhs) { x *= rhs.x; y *= rhs.y; z *= rhs.z; return *this; }
 Vector3D Vector3D::operator/(const double scale) const { return Vector3D(x / scale, y / scale, z / scale); }
 Vector3D & Vector3D::operator/=(const double scale) { x /= (float)scale; y /= (float)scale; z /= (float)scale; return *this; }
-Vector3D Vector3D::operator*(const Matrix3D & a) {
+Vector3D Vector3D::operator*(const Matrix4 & a) {
 	return Vector3D((x * a.mm[0][0]) + (y * a.mm[1][0]) + (z * a.mm[2][0]),
 					(x * a.mm[0][1]) + (y * a.mm[1][1]) + (z * a.mm[2][1]),
 					(x * a.mm[0][2]) + (y * a.mm[1][2]) + (z * a.mm[2][2]));
 }
-Vector3D Vector3D::operator*(const Matrix2D & a) {
+Vector3D Vector3D::operator*(const Matrix3 & a) {
 	return Vector3D((x * a.mm[0][0]) + (y * a.mm[1][0]) + (z * a.mm[2][0]), 
 					(x * a.mm[0][1]) + (y * a.mm[1][1]) + (z * a.mm[2][1]), 
 					(x * a.mm[0][2]) + (y * a.mm[1][2]) + (z * a.mm[2][2]));

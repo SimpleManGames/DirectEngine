@@ -72,4 +72,13 @@ public:
 	static Vector2D clampv(const Vector2D &a, const Vector2D &a_min, const Vector2D &a_max);
 };
 
+inline double Distance(const Vector2D& a, const Vector2D& b)
+{
+	return sqrtf(((float)a.x - (float)b.x)*((float)a.x - (float)b.x) + ((float)a.y - (float)b.y)*((float)a.y - (float)b.y));
+}
+inline double Dot(const Vector2D& a, const Vector2D& b)
+{
+	return a.x * b.x + a.y * b.y;
+}
+
 #endif

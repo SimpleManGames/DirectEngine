@@ -54,8 +54,8 @@ public:
 	Vector3D&    operator*=(const Vector3D& rhs);           // multiply each element and update this object
 	Vector3D     operator/(const double scale) const;       // inverse scale
 	Vector3D&    operator/=(const double scale);            // scale and update this object
-	Vector3D	 operator*(const class Matrix3D & a);
-	Vector3D	 operator*(const class Matrix2D & a);
+	Vector3D	 operator*(const class Matrix4 & a);
+	Vector3D	 operator*(const class Matrix3 & a);
 
 	bool        operator==(const Vector3D& rhs) const;      // exact compare, no epsilon
 	bool        operator!=(const Vector3D& rhs) const;      // exact compare, no epsilon

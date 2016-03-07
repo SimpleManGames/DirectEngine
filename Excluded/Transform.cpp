@@ -28,14 +28,14 @@ void Transform::setParent(Transform *a_parent)
 	e_parent = a_parent;
 }
 
-Matrix2D Transform::getGlobalTransform() const
+Matrix3 Transform::getGlobalTransform() const
 {
 	return
 		(e_parent ? e_parent->getGlobalTransform()
-			: Matrix2D::CreateIdentityMatrix())
-			* Matrix2D::CreateTranslationMatrix(position)
-			* Matrix2D::CreateScalingMatrix(scale)
-			* Matrix2D::CreateRotationMatrix(angle);
+			: Matrix3::CreateIdentityMatrix())
+			* Matrix3::CreateTranslationMatrix(position)
+			* Matrix3::CreateScalingMatrix(scale)
+			* Matrix3::CreateRotationMatrix(angle);
 }
 
 void Transform::setPosition(const Vector2D &a_position) { position = a_position; }

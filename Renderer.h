@@ -14,19 +14,20 @@
 	#include "Vector2D.h"
 #endif
 #ifndef _MATRIX2D_H
-	#include "Matrix2D.h"
+	#include "Matrix3.h"
 #endif // !_MATRIX2D_H
 #ifndef _RECT2D_H
 	#include "Rect2D.h"
 #endif // !_RECT2D_H
+#ifndef _CIRCLE_H
+#include "Circle.h"
+#endif // !_CIRCLE_H
 #ifndef _COLOR_H
 	#include "color.h"
 #endif // !_COLOR_H
 #ifndef _DELETEMACROS_H
 	#include "deletemacros.h"
 #endif
-
-#include "Shape.h"
 
 // Forward Declartion
 //class Image;
@@ -49,17 +50,12 @@ public:
 	void DrawLine(const Vector2D& v1, const Vector2D& v2, float lineWidth = 0.5f);
 	void DrawLine(float x1, float y1, float x2, float y2, float lineWidth = 0.5f);
 
-	void DrawLine(const Ray & ray, float lineWidth);
-
 	void DrawRect(double left, double top, double width, double height, float lineWidth = 0.5f);
 	void DrawRect(const Vector2D& lefttop, const Vector2D& rightbottom, float lineWidth = 0.5f);
 	void DrawRect(const Rect2D& rect, float lineWidth = 0.5f);
-	void DrawRect(const AABB & rect, float lineWidth);
 
 	void DrawCircle(double xcenter, double ycenter, double r, float lineWidth = 0.5f);
 	void DrawCircle(const Vector2D& center, double r, float lineWidth = 0.5f);
-
-	void DrawCircle(const Circle & cir, float lineWidth);
 
 	void DrawPolygon(const std::vector<Vector2D> vecPoints, bool close = true, float lineWidth = 0.5f);
 	void DrawPolygon(Vector2D* points, int size, bool close = true, float lineWidth = 0.5f);
@@ -68,12 +64,9 @@ public:
 	void FillRect(const Vector2D& lefttop, const Vector2D& rightbottom);
 	void FillRect(const Rect2D& rect);
 
-	void FillRect(const AABB & rect);
-
 	void FillCircle(const Vector2D& center, double r);
 	void FillCircle(double xcenter, double ycenter, double r);
-
-	void FillCircle(const Circle & cir);
+	void FillCircle(const Circle& cir);
 
 	void FillPolygon(const std::vector<Vector2D> vecPoints, bool close = true);
 	void FillPolygon(Vector2D* points, int size, bool close = true);

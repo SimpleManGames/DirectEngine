@@ -1,35 +1,35 @@
-#include "Matrix2D.h"
+#include "Matrix3.h"
 
 #ifndef _UNORDERED_SET_
 #include <unordered_set>
 #endif
 
 
-Matrix2D::Matrix2D() { Identity(); }
-Matrix2D::Matrix2D(float m0, float m1, float m2, float m3, float m4, float m5, float m6, float m7, float m8) {
+Matrix3::Matrix3() { Identity(); }
+Matrix3::Matrix3(float m0, float m1, float m2, float m3, float m4, float m5, float m6, float m7, float m8) {
 	m[0] = m0; m[1] = m1; m[2] = m2;
 	m[3] = m3; m[4] = m4; m[5] = m5;
 	m[6] = m6; m[7] = m7; m[8] = m8;
 }
 
-Matrix2D::Matrix2D(const Matrix2D & other) { *this = other; }
+Matrix3::Matrix3(const Matrix3 & other) { *this = other; }
 
-Matrix2D::~Matrix2D() {
+Matrix3::~Matrix3() {
 	if(this == NULL)
 		free(this);
 }
 
-float Matrix2D::GetDeterminant() { return m[0] * (m[4] * m[8] - m[5] * m[7]) - m[1] * (m[3] * m[8] - m[5] * m[6]) + m[2] * (m[3] * m[7] - m[4] * m[6]); }
+float Matrix3::GetDeterminant() { return m[0] * (m[4] * m[8] - m[5] * m[7]) - m[1] * (m[3] * m[8] - m[5] * m[6]) + m[2] * (m[3] * m[7] - m[4] * m[6]); }
 
-inline Matrix2D& Matrix2D::Identity()
+inline Matrix3& Matrix3::Identity()
 {
 	m[0] = m[4] = m[8] = 1.0f;
 	m[1] = m[2] = m[3] = m[5] = m[6] = m[7] = 0.0f;
 	return *this;
 }
-Matrix2D Matrix2D::Transpose()
+Matrix3 Matrix3::Transpose()
 {
-	Matrix2D matTranspose = *this;
+	Matrix3 matTranspose = *this;
 
 	std::swap(matTranspose[1], matTranspose[3]);
 	std::swap(matTranspose[2], matTranspose[6]);
@@ -37,7 +37,7 @@ Matrix2D Matrix2D::Transpose()
 
 	return matTranspose;
 }
-Matrix2D Matrix2D::Invert()
+Matrix3 Matrix3::Invert()
 {
 	float determinant, invDeterminant;
 	float tmp[9];
@@ -60,7 +60,7 @@ Matrix2D Matrix2D::Invert()
 						   // divide by the determinant
 	invDeterminant = 1.0f / determinant;
 
-	Matrix2D matInverse = Matrix2D(invDeterminant * tmp[0],
+	Matrix3 matInverse = Matrix3(invDeterminant * tmp[0],
 		invDeterminant * tmp[1],
 		invDeterminant * tmp[2],
 		invDeterminant * tmp[3],
@@ -73,9 +73,9 @@ Matrix2D Matrix2D::Invert()
 	return matInverse;
 }
 
-Vector2D Matrix2D::GetTranslation() const { return Vector2D(m[2], m[5]); }
-Vector2D Matrix2D::GetScale() const { return Vector2D(m[0], m[4]); }
-double Matrix2D::GetRotation() const
+Vector2D Matrix3::GetTranslation() const { return Vector2D(m[2], m[5]); }
+Vector2D Matrix3::GetScale() const { return Vector2D(m[0], m[4]); }
+double Matrix3::GetRotation() const
 {
 	if ((m[1] != (-1 * m[3])) || (m[4] != m[0]))
 		return -1.0;
@@ -86,26 +86,26 @@ double Matrix2D::GetRotation() const
 	}
 }
 
-Matrix2D Matrix2D::operator+(const Matrix2D& rhs) const
+Matrix3 Matrix3::operator+(const Matrix3& rhs) const
 {
-	return Matrix2D(m[0] + rhs[0], m[1] + rhs[1], m[2] + rhs[2],
+	return Matrix3(m[0] + rhs[0], m[1] + rhs[1], m[2] + rhs[2],
 		m[3] + rhs[3], m[4] + rhs[4], m[5] + rhs[5],
 		m[6] + rhs[6], m[7] + rhs[7], m[8] + rhs[8]);
 }
-Matrix2D Matrix2D::operator-(const Matrix2D& rhs) const
+Matrix3 Matrix3::operator-(const Matrix3& rhs) const
 {
-	return Matrix2D(m[0] - rhs[0], m[1] - rhs[1], m[2] - rhs[2],
+	return Matrix3(m[0] - rhs[0], m[1] - rhs[1], m[2] - rhs[2],
 		m[3] - rhs[3], m[4] - rhs[4], m[5] - rhs[5],
 		m[6] - rhs[6], m[7] - rhs[7], m[8] - rhs[8]);
 }
-Matrix2D& Matrix2D::operator+=(const Matrix2D& rhs)
+Matrix3& Matrix3::operator+=(const Matrix3& rhs)
 {
 	m[0] += rhs[0];  m[1] += rhs[1];  m[2] += rhs[2];
 	m[3] += rhs[3];  m[4] += rhs[4];  m[5] += rhs[5];
 	m[6] += rhs[6];  m[7] += rhs[7];  m[8] += rhs[8];
 	return *this;
 }
-Matrix2D& Matrix2D::operator-=(const Matrix2D& rhs)
+Matrix3& Matrix3::operator-=(const Matrix3& rhs)
 {
 	m[0] -= rhs[0];  m[1] -= rhs[1];  m[2] -= rhs[2];
 	m[3] -= rhs[3];  m[4] -= rhs[4];  m[5] -= rhs[5];
@@ -113,8 +113,8 @@ Matrix2D& Matrix2D::operator-=(const Matrix2D& rhs)
 	return *this;
 }
 
-Matrix2D Matrix2D::operator*(const Matrix2D& rhs) const {
-	return Matrix2D(
+Matrix3 Matrix3::operator*(const Matrix3& rhs) const {
+	return Matrix3(
 		m[0] * rhs[0] + m[3] * rhs[1] + m[6] * rhs[2],
 		m[1] * rhs[0] + m[4] * rhs[1] + m[7] * rhs[2],
 		m[2] * rhs[0] + m[5] * rhs[1] + m[8] * rhs[2],
@@ -127,58 +127,58 @@ Matrix2D Matrix2D::operator*(const Matrix2D& rhs) const {
 		m[1] * rhs[6] + m[4] * rhs[7] + m[7] * rhs[8],
 		m[2] * rhs[6] + m[5] * rhs[7] + m[8] * rhs[8]);
 }
-Matrix2D& Matrix2D::operator*=(const Matrix2D& rhs) {
+Matrix3& Matrix3::operator*=(const Matrix3& rhs) {
 	*this = *this * rhs;
 	return *this;
 }
 
-bool Matrix2D::operator==(const Matrix2D& rhs) const {
+bool Matrix3::operator==(const Matrix3& rhs) const {
 	return (m[0] == rhs[0]) && (m[1] == rhs[1]) && (m[2] == rhs[2]) &&
 		(m[3] == rhs[3]) && (m[4] == rhs[4]) && (m[5] == rhs[5]) &&
 		(m[6] == rhs[6]) && (m[7] == rhs[7]) && (m[8] == rhs[8]);
 }
-bool Matrix2D::operator!=(const Matrix2D& rhs) const {
+bool Matrix3::operator!=(const Matrix3& rhs) const {
 	return (m[0] != rhs[0]) || (m[1] != rhs[1]) || (m[2] != rhs[2]) ||
 		(m[3] != rhs[3]) || (m[4] != rhs[4]) || (m[5] != rhs[5]) ||
 		(m[6] != rhs[6]) || (m[7] != rhs[7]) || (m[8] != rhs[8]);
 }
 
-float Matrix2D::operator[](int index) const { return m[index]; }
-float& Matrix2D::operator[](int index) { return m[index]; }
+float Matrix3::operator[](int index) const { return m[index]; }
+float& Matrix3::operator[](int index) { return m[index]; }
 
-Matrix2D& Matrix2D::operator=(const Matrix2D& other) {
+Matrix3& Matrix3::operator=(const Matrix3& other) {
 	for (int i = 0; i < MAXNUMBER; ++i)
 		this->m[i] = other.m[i];
 
 	return *this;
 }
 
-Matrix2D Matrix2D::CreateIdentityMatrix() { return Matrix2D(1, 0, 0, 0, 1, 0, 0, 0, 1); }
+Matrix3 Matrix3::CreateIdentityMatrix() { return Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1); }
 
-Matrix2D Matrix2D::CreateRotationMatrix(double angle) {
-	return Matrix2D((float)cos(angle), (float)-sin(angle), 0.0f,
+Matrix3 Matrix3::CreateRotationMatrix(double angle) {
+	return Matrix3((float)cos(angle), (float)-sin(angle), 0.0f,
 					(float)sin(angle), (float)cos(angle) , 0.0f,
 								 0.0f,				 0.0f, 1.0f);
 }
 
-Matrix2D Matrix2D::CreateScalingMatrix(double scale) { return CreateScalingMatrix(scale, scale); }
-Matrix2D Matrix2D::CreateScalingMatrix(const Vector2D& scaleXY) { return CreateScalingMatrix(scaleXY.x, scaleXY.y); }
-Matrix2D Matrix2D::CreateScalingMatrix(double scaleX, double scaleY)
+Matrix3 Matrix3::CreateScalingMatrix(double scale) { return CreateScalingMatrix(scale, scale); }
+Matrix3 Matrix3::CreateScalingMatrix(const Vector2D& scaleXY) { return CreateScalingMatrix(scaleXY.x, scaleXY.y); }
+Matrix3 Matrix3::CreateScalingMatrix(double scaleX, double scaleY)
 {
-	return Matrix2D((float)scaleX,          0.0f, 0.0f,
+	return Matrix3((float)scaleX,          0.0f, 0.0f,
 							 0.0f, (float)scaleY, 0.0f,
 							 0.0f,			0.0f, 1.0f);
 }
 
-Matrix2D Matrix2D::CreateTranslationMatrix(const Vector2D& origin)
+Matrix3 Matrix3::CreateTranslationMatrix(const Vector2D& origin)
 {
-	return Matrix2D(		   1.0f,			0.0f, 0.0f,
+	return Matrix3(		   1.0f,			0.0f, 0.0f,
 							   0.0f,			1.0f, 0.0f,
 					(float)origin.x, (float)origin.y, 1.0f);
 }
-Matrix2D Matrix2D::CreateTranslationMatrix(double tx, double ty) { return CreateTranslationMatrix(Vector2D(tx, ty)); }
+Matrix3 Matrix3::CreateTranslationMatrix(double tx, double ty) { return CreateTranslationMatrix(Vector2D(tx, ty)); }
 
-const D2D1_MATRIX_3X2_F& Matrix2D::ToMatrix3x2F()
+const D2D1_MATRIX_3X2_F& Matrix3::ToMatrix3x2F()
 {
 	D2D1::Matrix3x2F mat;
 	

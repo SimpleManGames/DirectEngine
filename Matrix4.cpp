@@ -1,12 +1,12 @@
-#include "Matrix3D.h"
+#include "Matrix4.h"
 
 #ifndef _UNORDERED_SET_
 #include <unordered_set>
 #endif
 
-Matrix3D::Matrix3D() { Identity(); }
+Matrix4::Matrix4() { Identity(); }
 
-Matrix3D::Matrix3D(float m0, float m1, float m2, float m3, 
+Matrix4::Matrix4(float m0, float m1, float m2, float m3, 
 				   float m4, float m5, float m6, float m7, 
 				   float m8, float m9, float m10, float m11, 
 				   float m12, float m13, float m14, float m15)
@@ -17,25 +17,25 @@ Matrix3D::Matrix3D(float m0, float m1, float m2, float m3,
 	m[12] = m12; m[13] = m13; m[14] = m14; m[15] = m15;
 }
 
-Matrix3D::Matrix3D(const Matrix3D & other) {
+Matrix4::Matrix4(const Matrix4 & other) {
 	*this = other;
 }
 
 // WIP
-float Matrix3D::GetDeterminant()
+float Matrix4::GetDeterminant()
 {
 	return 0.0f;
 }
 
-Matrix3D & Matrix3D::Identity()
+Matrix4 & Matrix4::Identity()
 {
 	m[0] = m[5] = m[10] = m[15] = 1.0f;
 	m[1] = m[2] = m[3] = m[4] = m[6] = m[7] = m[8] = m[9] = m[11] = m[12] = m[13] = m[14] = 0.0f;
 	return *this;
 }
-Matrix3D Matrix3D::Transpose()
+Matrix4 Matrix4::Transpose()
 {
-	Matrix3D matTranspose = *this;
+	Matrix4 matTranspose = *this;
 
 	std::swap(matTranspose[1], matTranspose[4]);
 	std::swap(matTranspose[2], matTranspose[8]);
@@ -46,7 +46,7 @@ Matrix3D Matrix3D::Transpose()
 
 	return matTranspose;
 }
-Matrix3D Matrix3D::Invert()
+Matrix4 Matrix4::Invert()
 {
 	float determinant, invDeterminant;
 	float tmp[16];
@@ -80,7 +80,7 @@ Matrix3D Matrix3D::Invert()
     // divide by the determinant
 	invDeterminant = 1.0f / determinant;
 
-	Matrix3D matInverse = Matrix3D(
+	Matrix4 matInverse = Matrix4(
 		invDeterminant * tmp[0],
 		invDeterminant * tmp[1],
 		invDeterminant * tmp[2],
@@ -101,9 +101,9 @@ Matrix3D Matrix3D::Invert()
 	return matInverse;
 }
 
-Vector3D Matrix3D::GetTranslation() const { return Vector3D(m[3], m[7], m[11]); }
-Vector3D Matrix3D::GetScale() const { return Vector3D(m[0], m[5], m[10]); }
-double Matrix3D::GetRotation() const {
+Vector3D Matrix4::GetTranslation() const { return Vector3D(m[3], m[7], m[11]); }
+Vector3D Matrix4::GetScale() const { return Vector3D(m[0], m[5], m[10]); }
+double Matrix4::GetRotation() const {
 	if ((m[1] != (-1 * m[4])) || (m[5] != m[0]))
 		return -1.0;
 	else
@@ -113,25 +113,25 @@ double Matrix3D::GetRotation() const {
 	}
 }
 
-Matrix3D Matrix3D::operator+(const Matrix3D & rhs) const
+Matrix4 Matrix4::operator+(const Matrix4 & rhs) const
 {
-	return Matrix3D(
+	return Matrix4(
 		m[0] + rhs[0], m[1] + rhs[1], m[2] + rhs[2], m[3] + rhs[3], 
 		m[4] + rhs[4], m[5] + rhs[5], m[6] + rhs[6], m[7] + rhs[7], 
 		m[8] + rhs[8], m[9] + rhs[9], m[10] + rhs[10], m[11] + rhs[11],
 		m[12] + rhs[12], m[13] + rhs[13], m[14] + rhs[14], m[15] + rhs[15]);
 }
 
-Matrix3D Matrix3D::operator-(const Matrix3D & rhs) const
+Matrix4 Matrix4::operator-(const Matrix4 & rhs) const
 {
-	return Matrix3D(
+	return Matrix4(
 		m[0] - rhs[0], m[1] - rhs[1], m[2] - rhs[2], m[3] - rhs[3],
 		m[4] - rhs[4], m[5] - rhs[5], m[6] - rhs[6], m[7] - rhs[7],
 		m[8] - rhs[8], m[9] - rhs[9], m[10] - rhs[10], m[11] - rhs[11],
 		m[12] - rhs[12], m[13] - rhs[13], m[14] - rhs[14], m[15] - rhs[15]);
 }
 
-Matrix3D & Matrix3D::operator+=(const Matrix3D & rhs)
+Matrix4 & Matrix4::operator+=(const Matrix4 & rhs)
 {
 		m[0] += rhs[0]; m[1] += rhs[1]; m[2] += rhs[2]; m[3] += rhs[3];
 		m[4] += rhs[4]; m[5] += rhs[5]; m[6] += rhs[6]; m[7] += rhs[7];
@@ -140,7 +140,7 @@ Matrix3D & Matrix3D::operator+=(const Matrix3D & rhs)
 		return *this;
 }
 
-Matrix3D & Matrix3D::operator-=(const Matrix3D & rhs)
+Matrix4 & Matrix4::operator-=(const Matrix4 & rhs)
 {
 	m[0] -= rhs[0]; m[1] -= rhs[1]; m[2] -= rhs[2]; m[3] -= rhs[3];
 	m[4] -= rhs[4]; m[5] -= rhs[5]; m[6] -= rhs[6]; m[7] -= rhs[7];
@@ -149,9 +149,9 @@ Matrix3D & Matrix3D::operator-=(const Matrix3D & rhs)
 	return *this;
 }
 
-Matrix3D Matrix3D::operator*(const Matrix3D & a) const
+Matrix4 Matrix4::operator*(const Matrix4 & a) const
 {
-	return Matrix3D(
+	return Matrix4(
 		m[0]  * a[0] + m[1]  * a[4] + m[2]  * m[8]  + m[3]  * a[12], 
 		m[0]  * a[1] + m[1]  * a[5] + m[2]  * a[9]  + m[3]  * a[13], 
 		m[0]  * a[2] + m[1]  * a[6] + m[2]  * a[10] + m[3]  * a[14], 
@@ -173,7 +173,7 @@ Matrix3D Matrix3D::operator*(const Matrix3D & a) const
 		m[12] * a[3] + m[13] * a[7] + m[14] * a[11] + m[15] * a[15]);
 }
 
-Matrix3D & Matrix3D::operator*=(const Matrix3D & rhs)
+Matrix4 & Matrix4::operator*=(const Matrix4 & rhs)
 {
 	m[0] *= rhs[0]; m[1] *= rhs[1]; m[2] *= rhs[2]; m[3] *= rhs[3];
 	m[4] *= rhs[4]; m[5] *= rhs[5]; m[6] *= rhs[6]; m[7] *= rhs[7];
@@ -182,7 +182,7 @@ Matrix3D & Matrix3D::operator*=(const Matrix3D & rhs)
 	return *this;
 }
 
-bool Matrix3D::operator==(const Matrix3D & rhs) const
+bool Matrix4::operator==(const Matrix4 & rhs) const
 {
 	return ((m[0] == rhs[0]) && (m[1] == rhs[1]) && (m[2] == rhs[2]) && (m[3] == rhs[3]) &&
 		(m[4] == rhs[4]) && (m[5] == rhs[5]) && (m[6] == rhs[6]) && (m[7] == rhs[7]) &&
@@ -190,7 +190,7 @@ bool Matrix3D::operator==(const Matrix3D & rhs) const
 		(m[12] == rhs[12]) && (m[13] == rhs[13]) && (m[14] == rhs[14]) && (m[15] == rhs[15]));
 }
 
-bool Matrix3D::operator!=(const Matrix3D & rhs) const
+bool Matrix4::operator!=(const Matrix4 & rhs) const
 {
 	return ((m[0] != rhs[0]) && (m[1] != rhs[1]) && (m[2] != rhs[2]) && (m[3] != rhs[3]) &&
 		(m[4] != rhs[4]) && (m[5] != rhs[5]) && (m[6] != rhs[6]) && (m[7] != rhs[7]) &&
@@ -199,10 +199,10 @@ bool Matrix3D::operator!=(const Matrix3D & rhs) const
 
 }
 
-float Matrix3D::operator[](int index) const { return m[index]; }
-float & Matrix3D::operator[](int index) { return m[index]; }
+float Matrix4::operator[](int index) const { return m[index]; }
+float & Matrix4::operator[](int index) { return m[index]; }
 
-Matrix3D & Matrix3D::operator=(const Matrix3D & other)
+Matrix4 & Matrix4::operator=(const Matrix4 & other)
 {
 	for (int i = 0; i < MAXNUMBER; ++i)
 		this->m[i] = other.m[i];
@@ -210,27 +210,27 @@ Matrix3D & Matrix3D::operator=(const Matrix3D & other)
 	return *this;
 }
 
-Matrix3D Matrix3D::CreateIdentityMatrix() { return Matrix3D(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-Matrix3D Matrix3D::CreateRotationMatrix(double radians)
+Matrix4 Matrix4::CreateIdentityMatrix() { return Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+Matrix4 Matrix4::CreateRotationMatrix(double radians)
 {
-	return Matrix3D((float)cos(radians), (float)-sin(radians), 0.0f, 0.0f,
+	return Matrix4((float)cos(radians), (float)-sin(radians), 0.0f, 0.0f,
 					(float)sin(radians), (float)cos(radians), 0.0f, 0.0f,
 					0.0f, 0.0f, 1.0f, 0.0f,
 					0.0f, 0.0f, 0.0f, 1.0f);
 }
-Matrix3D Matrix3D::CreateScalingMatrix(double scale) { return CreateScalingMatrix(scale, scale, scale); }
-Matrix3D Matrix3D::CreateScalingMatrix(double scaleX, double scaleY, double scaleZ)
+Matrix4 Matrix4::CreateScalingMatrix(double scale) { return CreateScalingMatrix(scale, scale, scale); }
+Matrix4 Matrix4::CreateScalingMatrix(double scaleX, double scaleY, double scaleZ)
 {
-	return Matrix3D((float)scaleX, 0.0f, 0.0f, 0.0f,
+	return Matrix4((float)scaleX, 0.0f, 0.0f, 0.0f,
 					0.0f, (float)scaleY, 0.0f, 0.0f,
 					0.0f, 0.0f, (float)scaleZ, 0.0f,
 					0.0f, 0.0f, 0.0f, 1.0f);
 }
-Matrix3D Matrix3D::CreateScalingMatrix(const Vector3D & scaleXYZ) { return CreateScalingMatrix(scaleXYZ.x, scaleXYZ.y, scaleXYZ.z); }
-Matrix3D Matrix3D::CreateTranslationMatrix(const Vector3D & origin) { return CreateTranslationMatrix((double)origin.x, (double)origin.y, (double)origin.z); } 
-Matrix3D Matrix3D::CreateTranslationMatrix(double tx, double ty, double tz)
+Matrix4 Matrix4::CreateScalingMatrix(const Vector3D & scaleXYZ) { return CreateScalingMatrix(scaleXYZ.x, scaleXYZ.y, scaleXYZ.z); }
+Matrix4 Matrix4::CreateTranslationMatrix(const Vector3D & origin) { return CreateTranslationMatrix((double)origin.x, (double)origin.y, (double)origin.z); } 
+Matrix4 Matrix4::CreateTranslationMatrix(double tx, double ty, double tz)
 {
-	return Matrix3D(1.0f, 0.0f, 0.0f, (float)tx,
+	return Matrix4(1.0f, 0.0f, 0.0f, (float)tx,
 		0.0f, 1.0f, 0.0f, (float)ty,
 		0.0f, 0.0f, 1.0f, (float)tz,
 		0.0f, 0.0f, 0.0f, 1.0f);

@@ -1,7 +1,7 @@
 #include "Vector2D.h"
 
 double Vector2D::Length() const { return sqrtf((float)x*(float)x + (float)y*(float)y); }
-double Vector2D::Distance(const Vector2D& vec) const { return sqrtf(((float)vec.x - (float)x)*((float)vec.x - (float)x) + ((float)vec.y - (float)y)*((float)vec.y - (float)y)); }
+double Vector2D::Distance(const Vector2D& vec) const { return sqrtf(((float)x - (float)vec.x)*((float)x - (float)vec.x) + ((float)y - (float)vec.y)*((float)y - (float)vec.y)); }
 Vector2D& Vector2D::Normalize() {
 	double xxyy = x * x + y * y;
 	double invLength = 1.0 / sqrtf((float)xxyy);

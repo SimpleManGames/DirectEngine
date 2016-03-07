@@ -119,8 +119,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Collider.h" />
-    <ClInclude Include="Collision.h" />
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="d2dutill.h" />
@@ -131,17 +130,15 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GraphicsDeviceManager.h" />
     <ClInclude Include="iostream.h" />
-    <ClInclude Include="Matrix2D.h" />
-    <ClInclude Include="Matrix3D.h" />
+    <ClInclude Include="Matrix3.h" />
+    <ClInclude Include="Matrix4.h" />
     <ClInclude Include="ObjectCounter.h" />
     <ClInclude Include="Rect2D.h" />
     <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Shape.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="string.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="Transform.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="TypeChecker.h" />
     <ClInclude Include="Vector2D.h" />
@@ -151,22 +148,19 @@
     <ClInclude Include="WinMain.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="EngineTimer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="GraphicsDeviceManager.cpp" />
-    <ClCompile Include="Matrix2D.cpp" />
-    <ClCompile Include="Matrix3D.cpp" />
+    <ClCompile Include="Matrix3.cpp" />
+    <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Rect2D.cpp" />
     <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="TypeChecker.cpp" />
     <ClCompile Include="Vector2D.cpp" />
