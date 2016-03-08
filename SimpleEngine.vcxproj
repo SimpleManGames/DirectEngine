@@ -137,6 +137,7 @@
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="ObjectCounter.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="Polygon.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Rect2D.h" />
     <ClInclude Include="Renderer.h" />

@@ -218,5 +218,8 @@
     <ClInclude Include="Plane.h">
       <Filter>Header Files\Math\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="Polygon.h">
+      <Filter>Header Files\Math\Shapes</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
