@@ -6,15 +6,13 @@ struct Circle
 {
 public:
 	Circle()
-		: x(0)
-		, y(0)
+		: position(0, 0)
 		, radius(0) { }
 	Circle(const Vector2D& v, float r)
 		: position(v)
 		, radius(r) { }
 	Circle(double _x, double _y, float r)
-		: x(_x)
-		, y(_y)
+		: position(_x, _y)
 		, radius(r) { }
 
 	Circle(const Circle& c)
@@ -22,11 +20,9 @@ public:
 		, radius(c.radius) {  }
 	~Circle() {  }
 
-	union 
-	{
-		Vector2D position;
-		float x, y;
-	};
+
+	Vector2D position;
+	
 	float radius;
 
 	static const Circle empty;
@@ -62,7 +58,7 @@ public:
 	{
 		float r = this->radius + c.radius;
 		r *= r;
-		return r > sqrtf((this->x - c.x) * (this->x - c.x) + (this->y - c.y) * (this->y - c.y));
+		return r > sqrtf((this->position.x - c.position.x) * (this->position.x - c.position.x) + (this->position.y - c.position.y) * (this->position.y - c.position.y));
 	}
 	bool vsCircle(const Vector2D& p, float r) { return vsCircle({ p, r }); }
 	bool vsCircle(float x, float y, float r) { return vsCircle({ { x, y }, r }); }

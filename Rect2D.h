@@ -79,6 +79,8 @@ public:
 	{
 		Rect2D r;
 
+		r.pos = other.pos;
+
 		r.left = other.left;
 		r.right = other.right;
 		r.bottom = other.bottom;
@@ -129,8 +131,8 @@ public:
 		return (Dot((c.position - pc), (c.position - pc)) <= c.radius * c.radius);
 		//return Circle(Vector2D::clampv(c.position, this->min, this->max), 0).vsCircle(c);
 	}
-	bool vsCircle(const Vector2D& p, float r);
-	bool vsCircle(float x, float y, float r);
+	bool vsCircle(const Vector2D& p, float r) { vsCircle(p, r); }
+	bool vsCircle(float x, float y, float r) { vsCircle({ x, y }, r); }
 };
 
 inline bool operator== (const Rect2D r1, const Rect2D& r2)

@@ -130,20 +130,13 @@ int Engine::Draw(Context& context)
 	RENDERER->FillCircle(c2);*/
 
 	Rect2D r1({ 100, 100 }, { 200, 200 });
-	Circle c1(190, 190, 50);
+	Circle c1({ 236, 236 }, 50);
 
-	if(r1.vsCircle(c1))
-		RENDERER->SetColor(1, 0, 0, 1);
-	else
-		RENDERER->SetColor(0, 1, 0, 1);
+	if(r1.vsCircle(c1))	RENDERER->SetColor(1, 0, 0, 1);
+	else RENDERER->SetColor(0, 1, 0, 1);
 
 	RENDERER->FillRect(r1);
-	//RENDERER->FillCircle(c1);
-
-	RENDERER->DrawCircle(r1.top, r1.right, 5.0f);
-	//RENDERER->DrawCircle(r1.bottom, r1.right, 5.0f);
-	//RENDERER->DrawCircle(r1.top, r1.left, 5.0f);
-	RENDERER->DrawCircle(r1.bottom, r1.left, 5.0f);
+	RENDERER->FillCircle(c1);
 
 	RENDERER->DrawCircle(r1.min, 5.f);
 	RENDERER->DrawCircle(r1.max, 5.f);

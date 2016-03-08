@@ -17,7 +17,7 @@ void Renderer::SetColor(const Color& c)
 }
 void Renderer::SetColor(float r, float g, float b, float a) 
 { 
-	SetColor(Color(r, g, b, a)); 
+	SetColor(Color(r, g, b, a));
 }
 
 void Renderer::DrawLine(const Vector2D & v1, const Vector2D & v2, float lineWidth) 
@@ -99,7 +99,7 @@ void Renderer::FillCircle(double xcenter, double ycenter, double r)
 }
 void Renderer::FillCircle(const Circle& cir) 
 { 
-	FillCircle(cir.x, cir.y, cir.radius); 
+	FillCircle(cir.position.x, cir.position.y, cir.radius);
 }
 
 void Renderer::FillPolygon(const std::vector<Vector2D> vecPoints, bool close) 
