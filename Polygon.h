@@ -17,8 +17,40 @@ public:
 
 	std::vector<Vector2D> points;
 
+	static const Polygon empty;
 
+	Polygon operator=(const Polygon& other)
+	{
+		Polygon p;
+
+		p.points = other.points;
+
+		return p;
+	}
+	bool operator==(const Polygon& other)
+	{
+		if (this->points.size() == other.points.size())
+			for (int i = 0; i < this->points.size(); ++i)
+				if (this->points[i] == other.points[i])
+					continue;
+				else
+					return false;
+
+		return true;
+	}
+	Vector2D operator[](int index)
+	{
+		return this->points[index];
+	}
 };
 
+inline bool operator==(const Polygon p1, const Polygon p2)
+{
+	return (p1 == p2);
+}
+inline bool operator!=(const Polygon p1, const Polygon p2)
+{
+	return !(p1 == p2);
+}
 
 #endif // !_POLYGON_H
