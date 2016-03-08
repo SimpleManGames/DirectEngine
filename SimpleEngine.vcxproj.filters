@@ -126,6 +126,9 @@
     <ClCompile Include="Ray.cpp">
       <Filter>Header Files\Math\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Header Files\Math\Shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinMain.h">
@@ -210,6 +213,9 @@
       <Filter>Header Files\Math\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="Ray.h">
+      <Filter>Header Files\Math\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
       <Filter>Header Files\Math\Shapes</Filter>
     </ClInclude>
   </ItemGroup>

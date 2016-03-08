@@ -96,21 +96,18 @@ public:
 	}
 	bool operator== (const Rect2D& other)
 	{
-		if (this->left == other.left && 
-			this->right == other.right && 
-			this->top == other.top && 
-			this->bottom == other.bottom)
-			return true;
-
-		return false;
+		return (this->left == other.left &&
+				this->right == other.right &&
+				this->top == other.top &&
+				this->bottom == other.bottom);
 	}
 
 	bool IsEqual(Rect2D& other)
 	{
-		if (this->left == other.left && this->right == other.right && this->top == other.top && this->bottom == other.bottom)
-			return true;
-
-		return false;
+		return (this->left == other.left && 
+				this->right == other.right && 
+				this->top == other.top && 
+				this->bottom == other.bottom);
 	}
 	// Checks collision with another Rect2D
 	bool vsRect2D(Rect2D b)

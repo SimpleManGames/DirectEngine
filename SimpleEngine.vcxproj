@@ -136,6 +136,7 @@
     <ClInclude Include="Matrix3.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="ObjectCounter.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Rect2D.h" />
     <ClInclude Include="Renderer.h" />
@@ -160,6 +161,7 @@
     <ClCompile Include="GraphicsDeviceManager.cpp" />
     <ClCompile Include="Matrix3.cpp" />
     <ClCompile Include="Matrix4.cpp" />
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="Rect2D.cpp" />
     <ClCompile Include="Renderer.cpp" />
