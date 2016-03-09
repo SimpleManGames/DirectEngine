@@ -42,6 +42,8 @@ public:
 	{
 		return this->points[index];
 	}
+
+	int vsPolygon(Polygon& a, Polygon& b);
 };
 
 inline bool operator==(const Polygon p1, const Polygon p2)

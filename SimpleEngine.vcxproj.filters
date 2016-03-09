@@ -108,9 +108,6 @@
     <ClCompile Include="Singleton.cpp">
       <Filter>Header Files\Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="TypeChecker.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Matrix3.cpp">
       <Filter>Header Files\Math</Filter>
     </ClCompile>
@@ -127,6 +124,12 @@
       <Filter>Header Files\Math\Shapes</Filter>
     </ClCompile>
     <ClCompile Include="Plane.cpp">
+      <Filter>Header Files\Math\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="TypeChecker.cpp">
+      <Filter>Header Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Polygon.cpp">
       <Filter>Header Files\Math\Shapes</Filter>
     </ClCompile>
   </ItemGroup>

@@ -28,7 +28,7 @@ const std::tstring & TypeChecker::getType(int objectID)
 		return m_invalidType;
 	}
 
-	int index = m_mapTypes[objectID].size() - 1;
+	int index = (int)m_mapTypes[objectID].size() - 1;
 	return m_mapTypes[objectID][index];
 }
 
@@ -45,7 +45,7 @@ bool TypeChecker::isType(int objectID, const std::tstring & type)
 		return false;
 	}
 
-	int index = m_mapTypes[objectID].size() - 1;
+	int index = (int)m_mapTypes[objectID].size() - 1;
 	return m_mapTypes[objectID][index] == type;
 }
 
@@ -66,7 +66,7 @@ bool TypeChecker::isType(const std::tstring & type, const std::tstring & isType)
 		return false;
 	}
 
-	int index = m_mapTypes[(*itmap_from).first].size() - 1;
+	int index = (int)m_mapTypes[(*itmap_from).first].size() - 1;
 	return m_mapTypes[(*itmap_from).first][index] == type;
 }
 
