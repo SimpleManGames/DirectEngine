@@ -57,7 +57,7 @@ void Renderer::DrawCircle(double xcenter, double ycenter, double r, float lineWi
 }
 void Renderer::DrawCircle(const Vector2D & center, double r, float lineWidth) 
 { 
-	DrawCircle(center.x, center.y, lineWidth); 
+	DrawCircle(center.x, center.y, r, lineWidth); 
 }
 
 void Renderer::DrawPolygon(const std::vector<Vector2D> vecPoints, bool close, float lineWidth) 

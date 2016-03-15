@@ -97,6 +97,9 @@ int Engine::Intialize()
 
 #include "Circle.h"
 #include "Rect2D.h"
+#include "GameObject.h"
+#include "TransformComponent.h"
+#include "CircleCollider.h"
 
 int Engine::Draw(Context& context)
 {
@@ -141,7 +144,12 @@ int Engine::Draw(Context& context)
 	RENDERER->DrawCircle(r1.min, 5.f);
 	RENDERER->DrawCircle(r1.max, 5.f);*/
 
-
+	GameObject test1;
+	TransformComponent tran({ 100, 100 });
+	test1.AddComponents(&tran);
+	CircleCollider col(test1.FindComponentByType<TransformComponent>()->pos.x, test1.FindComponentByType<TransformComponent>()->pos.y, cos(50));
+	test1.AddComponents(&col);
+	test1.FindComponentByType<CircleCollider>()->DrawCollider(context, { 1, 0, 0, 1 });
 
 	graph->EndDraw();
 
