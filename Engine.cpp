@@ -147,10 +147,10 @@ int Engine::Draw(Context& context)
 	GameObject test1;
 	TransformComponent tran({ 100, 100 });
 	test1.AddComponents(&tran);
-	CircleCollider col(test1.FindComponentByType<TransformComponent>()->pos.x, test1.FindComponentByType<TransformComponent>()->pos.y, cos(50));
+	CircleCollider col(test1.FindComponentByType<TransformComponent>()->pos.x, test1.FindComponentByType<TransformComponent>()->pos.y, 50);
 	test1.AddComponents(&col);
 	test1.FindComponentByType<CircleCollider>()->DrawCollider(context, { 1, 0, 0, 1 });
-
+	
 	graph->EndDraw();
 
 	return true;
