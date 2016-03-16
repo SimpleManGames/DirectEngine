@@ -52,22 +52,30 @@ public:
 		};
 	};
 
-	bool vs(Circle c)
+	bool vs(Circle _c)
 	{
-		float r = this->r + c.radius;
+		float r = this->r + _c.radius;
 		r *= r;
-		return r > sqrtf((this->pos.x - c.position.x) * (this->pos.x - c.position.x) + (this->pos.y - c.position.y) * (this->pos.y - c.position.y));
+		//return r >= sqrtf((this->pos.x - _c.position.x) * (this->pos.x - _c.position.x) + (this->pos.y - _c.position.y) * (this->pos.y - _c.position.y));
+		return r >= Dot(this->pos - _c.position, this->pos - _c.position);
 	}
 	bool vs(const Vector2D& p, float r) { return vs({ p, r }); }
 	bool vs(float x, float y, float r) { return vs({ { x, y }, r }); }
-	bool vs(Rect2D r);
+	
+	bool vs(Rect2D r)
+	{
+		Vector2D pc = Vector2D::clampv(this->pos, r.min, r.max);
+		return (Dot((this->pos - pc), (this->pos - pc)) <= this->r * this->r);
+	}
+	bool vs(double l, double t, double r, double b) { return vs(Rect2D{ l, t, r, b }); }
+	bool vs(const Vector2D& v1, const Vector2D& v2) { return vs(Rect2D{ v1, v2 }); }
 	bool vs(Ray r);
 	bool vs(Plane p);
 
 	void DrawCollider(Context & context, Color _c)
 	{
 		RENDERER->SetColor(_c);
-		RENDERER->DrawCircle(c.position, c.radius);
+		RENDERER->DrawCircle(c.position, c.radius, 2.f);
 	}
 };
 

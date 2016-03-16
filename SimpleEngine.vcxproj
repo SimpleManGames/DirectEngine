@@ -145,6 +145,7 @@
     <ClInclude Include="Polygon.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Rect2D.h" />
+    <ClInclude Include="RectCollider.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Singleton.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="Rect2D.cpp" />
+    <ClCompile Include="RectCollider.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Singleton.cpp" />

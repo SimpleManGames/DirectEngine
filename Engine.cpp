@@ -100,6 +100,7 @@ int Engine::Intialize()
 #include "GameObject.h"
 #include "TransformComponent.h"
 #include "CircleCollider.h"
+#include "RectCollider.h"
 
 int Engine::Draw(Context& context)
 {
@@ -145,12 +146,22 @@ int Engine::Draw(Context& context)
 	RENDERER->DrawCircle(r1.max, 5.f);*/
 
 	GameObject test1;
-	TransformComponent tran({ 100, 100 });
-	test1.AddComponents(&tran);
-	CircleCollider col(test1.FindComponentByType<TransformComponent>()->pos.x, test1.FindComponentByType<TransformComponent>()->pos.y, 50);
-	test1.AddComponents(&col);
-	test1.FindComponentByType<CircleCollider>()->DrawCollider(context, { 1, 0, 0, 1 });
-	
+	GameObject test2;
+	TransformComponent tran1({ 100, 100, 1 }, { 0, 0, 0 }, 1.f);
+	TransformComponent tran2({ 150, 150, 1 }, { 0, 0, 0 }, 1.f);
+	test1.AddComponents(&tran1);
+	test2.AddComponents(&tran2);
+	CircleCollider col1(test1.FindComponentByType<TransformComponent>()->pos.x, test1.FindComponentByType<TransformComponent>()->pos.y, 50);
+	RectCollider col2({ 100, 100 }, { 200, 200});
+	test1.AddComponents(&col1);
+	test2.AddComponents(&col2);
+	Color c;
+	if (test1.FindComponentByType<CircleCollider>()->vs(test2.FindComponentByType<RectCollider>()->r))
+		  c = { 0, 1, 0, 1 };
+	else  c = { 1, 0, 0, 1 };
+	test1.FindComponentByType<CircleCollider>()->DrawCollider(context, c);
+	test2.FindComponentByType<RectCollider>()->DrawCollider(context, { 0, 0, 1, 1 });
+
 	graph->EndDraw();
 
 	return true;

@@ -13,7 +13,7 @@ public:
 		: points(p.points) { }
 	Polygon(std::vector<Vector2D> _points)
 		: points(_points) { }
-	~Polygon() { };
+	~Polygon() { }
 
 	std::vector<Vector2D> points;
 
@@ -43,14 +43,14 @@ public:
 		return this->points[index];
 	}
 
-	int vsPolygon(Polygon& a, Polygon& b);
+	int vsPolygon(Polygon& a, Polygon& b) { }
 };
 
-inline bool operator==(const Polygon p1, const Polygon p2)
+inline bool operator== (const Polygon& p1, const Polygon& p2)
 {
 	return (p1 == p2);
 }
-inline bool operator!=(const Polygon p1, const Polygon p2)
+inline bool operator!= (const Polygon& p1, const Polygon& p2)
 {
 	return !(p1 == p2);
 }

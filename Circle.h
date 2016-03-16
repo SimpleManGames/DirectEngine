@@ -53,15 +53,6 @@ public:
 
 		return false;
 	}
-
-	bool vsCircle(Circle c)
-	{
-		float r = this->radius + c.radius;
-		r *= r;
-		return r > sqrtf((this->position.x - c.position.x) * (this->position.x - c.position.x) + (this->position.y - c.position.y) * (this->position.y - c.position.y));
-	}
-	bool vsCircle(const Vector2D& p, float r) { return vsCircle({ p, r }); }
-	bool vsCircle(float x, float y, float r) { return vsCircle({ { x, y }, r }); }
 };
 
 inline bool operator== (const Circle c1, const Circle& c2)
