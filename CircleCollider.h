@@ -1,7 +1,9 @@
 #ifndef _CIRCLE_COLLIDER_H
 #define _CIRCLE_COLLIDER_H
 
+#include "GameObject.h"
 #include "Component.h"
+#include "TransformComponent.h"
 #include "Circle.h"
 #include "Ray.h"
 #include "Rect2D.h"
@@ -75,7 +77,7 @@ public:
 	void DrawCollider(Context & context, Color _c)
 	{
 		RENDERER->SetColor(_c);
-		RENDERER->DrawCircle(c.position, c.radius, 2.f);
+		RENDERER->DrawCircle(m_gameObject->FindComponentByType<TransformComponent>()->pos.xy, c.radius, 2.f);
 	}
 };
 

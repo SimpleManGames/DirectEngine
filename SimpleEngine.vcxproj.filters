@@ -151,6 +151,12 @@
       <Filter>Header Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="RectCollider.cpp">
+      <Filter>Header Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -266,8 +272,20 @@
     <ClInclude Include="CircleCollider.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
     <ClInclude Include="RectCollider.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MathHelper.h">
+      <Filter>Header Files\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

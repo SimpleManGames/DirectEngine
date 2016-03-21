@@ -36,6 +36,10 @@ public:
 	~Matrix3();
 
 	float        GetDeterminant();
+	float getValue(int i)
+	{
+		return m[i];
+	}
 
 	Matrix3&    Identity();
 	Matrix3    Transpose();                            // transpose itself and return reference
@@ -51,7 +55,19 @@ public:
 	Matrix3&    operator+=(const Matrix3& rhs);           // add rhs and update this object
 	Matrix3&    operator-=(const Matrix3& rhs);           // subtract rhs and update this object
 	Matrix3     operator*(const Matrix3& rhs) const;      // multiplication: M3 = M1 * M2
+	Vector3D	operator* (const Vector3D& v);
 	Matrix3&    operator*=(const Matrix3& rhs);           // multiplication: M1' = M1 * M2
+	void		operator *= (float scalar) {
+		m[0] *= scalar;
+		m[1] *= scalar;
+		m[2] *= scalar;
+		m[3] *= scalar;
+		m[4] *= scalar;
+		m[5] *= scalar;
+		m[6] *= scalar;
+		m[7] *= scalar;
+		m[8] *= scalar;
+	}
 
 	bool        operator==(const Matrix3& rhs) const;      // exact compare, no epsilon
 	bool        operator!=(const Matrix3& rhs) const;      // exact compare, no epsilon

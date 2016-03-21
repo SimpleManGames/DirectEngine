@@ -124,6 +124,7 @@
   <ItemGroup>
     <ClInclude Include="Circle.h" />
     <ClInclude Include="CircleCollider.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentManager.h" />
@@ -138,11 +139,14 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GraphicsDeviceManager.h" />
     <ClInclude Include="iostream.h" />
+    <ClInclude Include="MathHelper.h" />
     <ClInclude Include="Matrix3.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="ObjectCounter.h" />
+    <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Polygon.h" />
+    <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Rect2D.h" />
     <ClInclude Include="RectCollider.h" />
@@ -174,8 +178,10 @@
     <ClCompile Include="GraphicsDeviceManager.cpp" />
     <ClCompile Include="Matrix3.cpp" />
     <ClCompile Include="Matrix4.cpp" />
+    <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Polygon.cpp" />
+    <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="Rect2D.cpp" />
     <ClCompile Include="RectCollider.cpp" />

@@ -44,7 +44,7 @@ bool Timer::Initialize()
 	BaseObject::Initialize();
 
 	Start();
-
+	
 	return true;
 }
 
@@ -55,7 +55,7 @@ bool Timer::Update(Context & context)
 	BaseObject::Update(context);
 
 	if (m_bStopped) {
-		m_DeltaTime = 0.0f;
+		m_DeltaTime = 0.0;
 		return true;
 	}
 

@@ -47,6 +47,7 @@ public:
 	Vector3D     operator+(const Vector3D& rhs) const;      // add rhs
 	Vector3D     operator-(const Vector3D& rhs) const;      // subtract rhs
 	Vector3D&    operator+=(const Vector3D& rhs);           // add rhs and update this object
+	Vector3D&	 operator+=(const float rhs);
 	Vector3D&    operator-=(const Vector3D& rhs);           // subtract rhs and update this object
 	Vector3D     operator*(const double scale) const;       // scale
 	Vector3D     operator*(const Vector3D& rhs) const;      // multiply each element
@@ -61,7 +62,8 @@ public:
 	bool        operator!=(const Vector3D& rhs) const;      // exact compare, no epsilon
 	bool        operator<(const Vector3D& rhs) const;       // comparison for sort
 	bool        operator>(const Vector3D& rhs) const;
-
+	float& operator [](unsigned int i) { return v[i]; }
+	float operator [](unsigned int i) const { return v[i]; }
 	Vector3D Cross(const Vector3D &a, const Vector3D &b);
 
 	static Vector3D minv(const Vector3D &a, const Vector3D &b);

@@ -47,6 +47,14 @@ Vector3D Vector3D::operator-() const { return Vector3D(-x, -y, -z); }
 Vector3D Vector3D::operator+(const Vector3D & rhs) const { return Vector3D(x + rhs.x, y + rhs.y, z + rhs.z); }
 Vector3D Vector3D::operator-(const Vector3D & rhs) const { return Vector3D(x - rhs.x, y - rhs.y, z - rhs.z); }
 Vector3D & Vector3D::operator+=(const Vector3D & rhs) { x += rhs.x; y += rhs.y; z += rhs.z; return *this; }
+Vector3D & Vector3D::operator+=(const float rhs)
+{
+	this->x + rhs;
+	this->y + rhs;
+	this->z + rhs;
+
+	return *this;
+}
 Vector3D & Vector3D::operator-=(const Vector3D & rhs) { x -= rhs.x; y -= rhs.y; z -= rhs.z; return *this; }
 Vector3D Vector3D::operator*(const double scale) const { return Vector3D(x * scale, y * scale, z * scale); }
 Vector3D Vector3D::operator*(const Vector3D & rhs) const { return Vector3D(x * rhs.x, y * rhs.y, z * rhs.z); }

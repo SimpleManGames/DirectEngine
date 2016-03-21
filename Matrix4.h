@@ -10,6 +10,7 @@
 #ifndef _2DUTILL_H
 #include "d2dutill.h"
 #endif
+#include "Quaternion.h"
 
 /*__declspec(align(32))*/ class Matrix4
 {
@@ -74,6 +75,33 @@ public:
 	static Matrix4 CreateTranslationMatrix(double tx, double ty, double tz);          // Instantiate a translation matrix
 
 	const D2D1_MATRIX_3X2_F& Matrix4::ToMatrix3x2F();
+
+	static Matrix4 toMatrix4(Quaternion q, Vector3D v, float scale)
+	{
+		Matrix3 rotation;
+
+		q.toRotationMatrix(rotation);
+
+		rotation *= scale;
+
+		return Matrix4(rotation[0], rotation[1], rotation[2], v[0],
+			rotation[3], rotation[4], rotation[5], v[1],
+			rotation[6], rotation[7], rotation[8], v[2],
+			0, 0, 0, 1);
+	}
+	static Matrix4 toMatrix4(Quaternion q, Vector3D v, Matrix3 scale)
+	{
+		Matrix3 rotation;
+
+		q.toRotationMatrix(rotation);
+
+		rotation *= scale;
+
+		return Matrix4(rotation[0], rotation[1], rotation[2], v[0],
+			rotation[3], rotation[4], rotation[5], v[1],
+			rotation[6], rotation[7], rotation[8], v[2],
+			0, 0, 0, 1);
+	}
 private:
 	static const int MAXNUMBER = 16;
 

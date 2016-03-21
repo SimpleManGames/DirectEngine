@@ -127,6 +127,16 @@ Matrix3 Matrix3::operator*(const Matrix3& rhs) const {
 		m[1] * rhs[6] + m[4] * rhs[7] + m[7] * rhs[8],
 		m[2] * rhs[6] + m[5] * rhs[7] + m[8] * rhs[8]);
 }
+Vector3D Matrix3::operator*(const Vector3D & v)
+{
+	Vector3D result;
+
+	result[0] = v[0] * m[0] + v[1] * m[1] + v[2] * m[2];
+	result[1] = v[0] * m[3] + v[1] * m[4] + v[2] * m[5];
+	result[2] = v[0] * m[6] + v[1] * m[7] + v[2] * m[8];
+
+	return Vector3D(result[0], result[1], result[2]);
+}
 Matrix3& Matrix3::operator*=(const Matrix3& rhs) {
 	*this = *this * rhs;
 	return *this;
@@ -153,12 +163,15 @@ Matrix3& Matrix3::operator=(const Matrix3& other) {
 	return *this;
 }
 
-Matrix3 Matrix3::CreateIdentityMatrix() { return Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1); }
+Matrix3 Matrix3::CreateIdentityMatrix() { return Matrix3(1, 0, 0, 
+														 0, 1, 0, 
+														 0, 0, 1); 
+}
 
 Matrix3 Matrix3::CreateRotationMatrix(double angle) {
 	return Matrix3((float)cos(angle), (float)-sin(angle), 0.0f,
-					(float)sin(angle), (float)cos(angle) , 0.0f,
-								 0.0f,				 0.0f, 1.0f);
+				   (float)sin(angle),  (float)cos(angle), 0.0f,
+					   		    0.0f,				0.0f, 1.0f);
 }
 
 Matrix3 Matrix3::CreateScalingMatrix(double scale) { return CreateScalingMatrix(scale, scale); }
@@ -166,13 +179,13 @@ Matrix3 Matrix3::CreateScalingMatrix(const Vector2D& scaleXY) { return CreateSca
 Matrix3 Matrix3::CreateScalingMatrix(double scaleX, double scaleY)
 {
 	return Matrix3((float)scaleX,          0.0f, 0.0f,
-							 0.0f, (float)scaleY, 0.0f,
-							 0.0f,			0.0f, 1.0f);
+							0.0f, (float)scaleY, 0.0f,
+							0.0f,		   0.0f, 1.0f);
 }
 
 Matrix3 Matrix3::CreateTranslationMatrix(const Vector2D& origin)
 {
-	return Matrix3(		   1.0f,			0.0f, 0.0f,
+	return Matrix3(			   1.0f,			0.0f, 0.0f,
 							   0.0f,			1.0f, 0.0f,
 					(float)origin.x, (float)origin.y, 1.0f);
 }

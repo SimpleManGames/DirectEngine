@@ -101,6 +101,9 @@ int Engine::Intialize()
 #include "TransformComponent.h"
 #include "CircleCollider.h"
 #include "RectCollider.h"
+#include "Collision.h"
+#include "PhysicsComponent.h"
+#include "ComponentManager.h"
 
 int Engine::Draw(Context& context)
 {
@@ -145,22 +148,35 @@ int Engine::Draw(Context& context)
 	RENDERER->DrawCircle(r1.min, 5.f);
 	RENDERER->DrawCircle(r1.max, 5.f);*/
 
-	GameObject test1;
-	GameObject test2;
+	GameObject test1 = { "test1" };
+	GameObject test2 = { "test2" };
 	TransformComponent tran1({ 100, 100, 1 }, { 0, 0, 0 }, 1.f);
 	TransformComponent tran2({ 150, 150, 1 }, { 0, 0, 0 }, 1.f);
 	test1.AddComponents(&tran1);
 	test2.AddComponents(&tran2);
 	CircleCollider col1(test1.FindComponentByType<TransformComponent>()->pos.x, test1.FindComponentByType<TransformComponent>()->pos.y, 50);
-	RectCollider col2({ 100, 100 }, { 200, 200});
+	CircleCollider col2(test2.FindComponentByType<TransformComponent>()->pos.x, test2.FindComponentByType<TransformComponent>()->pos.y, 50);
 	test1.AddComponents(&col1);
 	test2.AddComponents(&col2);
+	PhysicsComponent phys1({}, 10, 5);
+	PhysicsComponent phys2({}, 10, 5);
+	test1.AddComponents(&phys1);
+	test2.AddComponents(&phys2);
 	Color c;
-	if (test1.FindComponentByType<CircleCollider>()->vs(test2.FindComponentByType<RectCollider>()->r))
-		  c = { 0, 1, 0, 1 };
-	else  c = { 1, 0, 0, 1 };
-	test1.FindComponentByType<CircleCollider>()->DrawCollider(context, c);
-	test2.FindComponentByType<RectCollider>()->DrawCollider(context, { 0, 0, 1, 1 });
+	Manifold m(&test1, &test2);
+
+	if (Manifold_CC(&m) /*test1.FindComponentByType<CircleCollider>()->vs(test2.FindComponentByType<CircleCollider>()->r)*/)
+		ResolveCollision(&m);
+
+	test1.FindComponentByType<CircleCollider>()->DrawCollider(context, { 0, 0, 1, 1 });
+	test2.FindComponentByType<CircleCollider>()->DrawCollider(context, { 0, 0, 1, 1 });
+
+	/*Singleton<GraphicsDeviceManager>::GetInstance()->GetGraphics()->GetRenderTarget()->SetTransform((
+		Matrix3::CreateTranslationMatrix(0, 0) * 
+		Matrix3::CreateRotationMatrix(0.0f) * 
+		Matrix3::CreateScalingMatrix(1.0f)).ToMatrix3x2F());*/
+
+	//ComponentManager::getInstance()->Update();
 
 	graph->EndDraw();
 
