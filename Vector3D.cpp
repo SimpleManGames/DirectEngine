@@ -31,14 +31,14 @@ Vector3D Vector3D::Normal(const Vector3D & a)
 	return ret;
 }
 float Vector3D::Magnitude() { return sqrtf(x * x + y * y + z * z); }
-Vector3D Vector3D::Reflect(const Vector3D & v, const Vector3D & a) {
-	Vector3D n = Normal(a);
+Vector3D Vector3D::Reflect(const Vector3D & v, const Vector3D & n) {
+	/*Vector3D n = Normal(a);
 	float co = -2 * ((float)v.Dot(n) / (n.Magnitude() * n.Magnitude()));
 	Vector3D r = {};
 	r.x = v.x + co * n.x;
 	r.y = r.y + co * n.y;
-	r.z = r.z + co * n.z;
-	return r;
+	r.z = r.z + co * n.z;*/
+	return n * (2 * Dot(v, n)) - v;
 }
 
 Vector3D Vector3D::Project(const Vector3D & b) { return Vector3D(b.x * (x * b.x) / (b.x * b.x), b.y * (y * y) / (b.y * b.y), b.z * (z * b.z) / (b.x * b.x)); }

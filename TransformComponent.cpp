@@ -117,7 +117,7 @@ Vector3D TransformComponent::getRight() { return this->m_right; }
 Vector3D TransformComponent::getUp() { return this->m_up; }
 Vector3D TransformComponent::getDirection() { return this->m_direction; }
 
-Vector3D TransformComponent::getPosition() { return this->m_position; }
+Vector3D& TransformComponent::getPosition() { return this->m_position; }
 Vector3D TransformComponent::getWorldPosition()
 {
 	if (this->m_gameObject->m_parent != NULL)

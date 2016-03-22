@@ -75,7 +75,7 @@ bool Manifold_CC(Manifold *m)
 	GameObject *b = m->B;
 
 	// Vector from A to B
-	Vector2D n = b->FindComponentByType<TransformComponent>()->pos.xy - a->FindComponentByType<TransformComponent>()->pos.xy;
+	Vector2D n = b->FindComponentByType<TransformComponent>()->getPosition().xy - a->FindComponentByType<TransformComponent>()->getPosition().xy;
 
 	float r = a->FindComponentByType<CircleCollider>()->r + b->FindComponentByType<CircleCollider>()->r;
 	r *= r;

@@ -19,6 +19,7 @@ enum SystemType;
 
 class System;
 class Game;
+class GameObject;
 
 // Enumaration
 enum EngineState

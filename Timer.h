@@ -26,8 +26,10 @@ public:
 	bool Update(Context& context);
 	bool ShutDown();
 
+public:
 	float GetTotalTimer();
 	float GetDeltaTime();
+	double m_DeltaTime;
 
 	void Reset();
 
@@ -38,7 +40,6 @@ private:
 
 	// Members
 	double m_SecondsPerCount;
-	double m_DeltaTime;
 
 	__int64 m_BaseTime;
 	__int64 m_PauseTime;

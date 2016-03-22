@@ -57,6 +57,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lparam)
 
 	return DefWindowProc(hWnd, msg, wparam, lparam);
 }
+int Window::GetWidth() { return m_Width; }
+int Window::GetHeight() { return m_Height; }
 LRESULT Window::HandleEvent(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
 	switch (msg)

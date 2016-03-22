@@ -20,11 +20,6 @@ static float toRadians(float degrees)
 	return 0.0f;
 }
 
-static float round(float r)
-{
-	return (r > 0.0f) ? floor(r + 0.5f) : ceil(r - 0.5f);
-}
-
 template <typename T>
 static T clamp(T min, T value, T max)
 {
@@ -54,7 +49,7 @@ static T maximum(T a, T b)
 
 static float lerp(float start, float end, float t)
 {
-	return ((float)1 - t)*start + t*end;
+	return ((float)1 - t) * start + t * end;
 }
 
 static Vector2D lerp(Vector2D start, Vector2D end, float dt)

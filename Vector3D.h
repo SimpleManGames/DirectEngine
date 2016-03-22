@@ -40,7 +40,7 @@ public:
 	Vector3D&    Normalize();                               // normalized vector
 	static Vector3D	 Normal(const Vector3D &a);
 	float		 Magnitude();
-	Vector3D	 Reflect(const Vector3D &v, const Vector3D &a);
+	static Vector3D	 Reflect(const Vector3D &v, const Vector3D &a);
 	Vector3D	 Project(const Vector3D &b);
 															// operators
 	Vector3D     operator-()const;                          // unary operator (negate)

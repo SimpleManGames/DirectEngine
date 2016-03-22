@@ -13,6 +13,11 @@ class TransformComponent
 	: public Component
 {
 public:
+	TransformComponent()
+	{
+		this->Awake();
+	}
+
 	Quaternion m_rotation;
 	Vector3D m_up;
 	Vector3D m_right;
@@ -46,7 +51,7 @@ public:
 	Vector3D getUp();
 	Vector3D getDirection();
 	
-	Vector3D getPosition();
+	Vector3D& getPosition();
 	Vector3D getWorldPosition();
 	
 	TransformComponent* setPosition(Vector3D position);

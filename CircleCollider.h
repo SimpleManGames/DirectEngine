@@ -42,6 +42,11 @@ public:
 	{
 	
 	}
+	CircleCollider(const CircleCollider& other)
+	{
+		pos = other.pos;
+		r = other.r;
+	}
 	~CircleCollider() { }
 
 	union
@@ -53,6 +58,10 @@ public:
 			float r;
 		};
 	};
+
+	CircleCollider* setCircle(float x, float y, float r);
+	CircleCollider* setCircle(Vector2D pos, float r);
+	CircleCollider* setCircle(Vector3D all);
 
 	bool vs(Circle _c)
 	{
@@ -66,7 +75,7 @@ public:
 	
 	bool vs(Rect2D r)
 	{
-		Vector2D pc = Vector2D::clampv(this->pos, r.min, r.max);
+		Vector2D pc(Vector2D::clampv(this->pos, r.min, r.max));
 		return (Dot((this->pos - pc), (this->pos - pc)) <= this->r * this->r);
 	}
 	bool vs(double l, double t, double r, double b) { return vs(Rect2D{ l, t, r, b }); }
@@ -77,7 +86,7 @@ public:
 	void DrawCollider(Context & context, Color _c)
 	{
 		RENDERER->SetColor(_c);
-		RENDERER->DrawCircle(m_gameObject->FindComponentByType<TransformComponent>()->pos.xy, c.radius, 2.f);
+		RENDERER->DrawCircle(this->m_gameObject->FindComponentByType<TransformComponent>()->getPosition().xy, c.radius, 2.f);
 	}
 };
 

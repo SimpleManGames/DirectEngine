@@ -1,6 +1,8 @@
 #ifndef _GRAPHICSDEVICEMANAGER_H
 #define _GRAPHICSDEVICEMANAGER_H
 
+#define GETWINDOW Singleton<GraphicsDeviceManager>::GetInstance()->GetGraphics()->m_pWindow
+
 // Foward Declaration
 class Graphics;
 

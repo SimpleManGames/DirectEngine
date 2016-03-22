@@ -114,69 +114,42 @@ int Engine::Draw(Context& context)
 
 	// Draw Game
 
-	/*Rect2D r1({ 100, 100 }, { 200, 200 });
-	Rect2D r2({ 150, 150 }, { 250, 250 });
+	CircleCollider c({ 0, 0, 25 });
+	RectCollider r({ 100, 100 }, { 200, 200 });
 
-	if(r1.vsRect2D(r2))
-		RENDERER->SetColor(1, 0, 0, 1);
-	else 
-		RENDERER->SetColor(0, 1, 0, 1);
+	if (c.vs(r.r))
+	{
+		RENDERER->DrawCircle(c.pos, c.r); RENDERER->DrawRect(r.r);
+	}
 
-	RENDERER->FillRect(r1);
-	RENDERER->FillRect(r2);*/
+	GameObject topWall = { "Top Wall" };
+	RectCollider tr({ 0.0 , 0.0 }, { 1.0, (double)GETWINDOW->GetWidth() });
+	topWall.AddComponents(&tr);
+	tr.DrawCollider(context, { 0,0,0,1 });
 
-	/*Circle c1(200, 200, 50);
-	Circle c2(100, 100, 50);
+	GameObject bottomWall = { "Bottom Wall" };
+	RectCollider br({ (double)WINDOW->GetWidth(), (double)WINDOW->GetHeight() }, { (double)WINDOW->GetWidth() - 1.0, (double)WINDOW->GetHeight() });
+	bottomWall.AddComponents(&br);
+	br.DrawCollider(context, { 0, 0, 0, 1 });
 
-	if (c1.vsCircle(c2))
-		RENDERER->SetColor(1, 0, 0, 1);
-	else 
-		RENDERER->SetColor(0, 1, 0, 1);
+	GameObject a = { "a" };
+	TransformComponent ta;
+	static Vector3D p = {};
+	static Vector3D d = { 1, 1, 1 };
+	ta.setPosition(p += d);
+	CircleCollider ca;
+	ca.setCircle(ta.getPosition().xy, 25);
 
-	RENDERER->FillCircle(c1);
-	RENDERER->FillCircle(c2);*/
+	a.AddComponents(&ta);
+	a.AddComponents(&ca);
+	Color c_ = { 0,0,0,1 };
+	RENDERER->SetColor(c_);
+	RENDERER->DrawLine({br.top, br.left}, { br.top, br.right }, 2.f);
 
-	/*Rect2D r1({ 100, 100 }, { 200, 200 });
-	Circle c1({ 236, 236 }, 50);
+	if (ca.vs(br.r)) 
+		d = Vector3D::Reflect(d, { br.top, br.right, 0 });
 
-	if(r1.vsCircle(c1))	RENDERER->SetColor(1, 0, 0, 1);
-	else RENDERER->SetColor(0, 1, 0, 1);
-
-	RENDERER->FillRect(r1);
-	RENDERER->FillCircle(c1);
-
-	RENDERER->DrawCircle(r1.min, 5.f);
-	RENDERER->DrawCircle(r1.max, 5.f);*/
-
-	GameObject test1 = { "test1" };
-	GameObject test2 = { "test2" };
-	TransformComponent tran1({ 100, 100, 1 }, { 0, 0, 0 }, 1.f);
-	TransformComponent tran2({ 150, 150, 1 }, { 0, 0, 0 }, 1.f);
-	test1.AddComponents(&tran1);
-	test2.AddComponents(&tran2);
-	CircleCollider col1(test1.FindComponentByType<TransformComponent>()->pos.x, test1.FindComponentByType<TransformComponent>()->pos.y, 50);
-	CircleCollider col2(test2.FindComponentByType<TransformComponent>()->pos.x, test2.FindComponentByType<TransformComponent>()->pos.y, 50);
-	test1.AddComponents(&col1);
-	test2.AddComponents(&col2);
-	PhysicsComponent phys1({}, 10, 5);
-	PhysicsComponent phys2({}, 10, 5);
-	test1.AddComponents(&phys1);
-	test2.AddComponents(&phys2);
-	Color c;
-	Manifold m(&test1, &test2);
-
-	if (Manifold_CC(&m) /*test1.FindComponentByType<CircleCollider>()->vs(test2.FindComponentByType<CircleCollider>()->r)*/)
-		ResolveCollision(&m);
-
-	test1.FindComponentByType<CircleCollider>()->DrawCollider(context, { 0, 0, 1, 1 });
-	test2.FindComponentByType<CircleCollider>()->DrawCollider(context, { 0, 0, 1, 1 });
-
-	/*Singleton<GraphicsDeviceManager>::GetInstance()->GetGraphics()->GetRenderTarget()->SetTransform((
-		Matrix3::CreateTranslationMatrix(0, 0) * 
-		Matrix3::CreateRotationMatrix(0.0f) * 
-		Matrix3::CreateScalingMatrix(1.0f)).ToMatrix3x2F());*/
-
-	//ComponentManager::getInstance()->Update();
+	a.FindComponentByType<CircleCollider>()->DrawCollider(context, { 0, 0, 0, 1 });
 
 	graph->EndDraw();
 

@@ -5,6 +5,7 @@
 #include "Ray.h"
 //#include "Polygon.h"
 
+#include "GameObject.h"
 #include "Context.h"
 #include "Renderer.h"
 
@@ -120,7 +121,7 @@ public:
 	void DrawCollider(Context & context, Color c)
 	{
 		RENDERER->SetColor(c);
-		RENDERER->DrawRect(r, 2.f);
+		RENDERER->DrawRect(min, max, 2.f);
 	}
 };
 

@@ -4,9 +4,6 @@
 #include "Vector2D.h"
 #include "Circle.h"
 
-template <typename T>
-T clamp(T in, T low, T high) { return min(max(in, low), high); }
-
 struct Rect2D
 {
 public:
