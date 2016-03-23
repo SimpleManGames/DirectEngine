@@ -80,5 +80,12 @@ inline double Dot(const Vector2D& a, const Vector2D& b)
 {
 	return a.x * b.x + a.y * b.y;
 }
+inline Vector2D abs(Vector2D vec)
+{
+	Vector2D temp = vec;
+	if (vec.x < 0) temp.x = -temp.x;
+	if (vec.y < 0) temp.y = -temp.y;
+	return temp;
+}
 
 #endif

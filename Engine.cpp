@@ -62,6 +62,16 @@ int Engine::RunLoop()
 	return (int)msg.wParam;
 }
 
+#include "Circle.h"
+#include "Rect2D.h"
+#include "GameObject.h"
+#include "TransformComponent.h"
+#include "CircleCollider.h"
+#include "RectCollider.h"
+#include "Collision.h"
+#include "PhysicsComponent.h"
+#include "ComponentManager.h"
+
 //Private Methods
 int Engine::Intialize()
 {
@@ -92,18 +102,13 @@ int Engine::Intialize()
 	Singleton<GraphicsDeviceManager>::CreateInstance();
 	Singleton<GraphicsDeviceManager>::GetInstance()->SetGraphics(GetSystem<Graphics>(SystemType::Sys_Graphics));
 
+
+	
+
 	return true;
 }
 
-#include "Circle.h"
-#include "Rect2D.h"
-#include "GameObject.h"
-#include "TransformComponent.h"
-#include "CircleCollider.h"
-#include "RectCollider.h"
-#include "Collision.h"
-#include "PhysicsComponent.h"
-#include "ComponentManager.h"
+
 
 int Engine::Draw(Context& context)
 {
@@ -114,42 +119,13 @@ int Engine::Draw(Context& context)
 
 	// Draw Game
 
-	CircleCollider c({ 0, 0, 25 });
-	RectCollider r({ 100, 100 }, { 200, 200 });
+	Ray ray(100, 100, 200, 200, 5);
+	Rect2D rect(100, 150, 200, 250);
 
-	if (c.vs(r.r))
-	{
-		RENDERER->DrawCircle(c.pos, c.r); RENDERER->DrawRect(r.r);
-	}
+	RENDERER->DrawLine(ray.pos, ray.dir, 5.f);
+	RENDERER->DrawRect(rect, 5.f);
 
-	GameObject topWall = { "Top Wall" };
-	RectCollider tr({ 0.0 , 0.0 }, { 1.0, (double)GETWINDOW->GetWidth() });
-	topWall.AddComponents(&tr);
-	tr.DrawCollider(context, { 0,0,0,1 });
-
-	GameObject bottomWall = { "Bottom Wall" };
-	RectCollider br({ (double)WINDOW->GetWidth(), (double)WINDOW->GetHeight() }, { (double)WINDOW->GetWidth() - 1.0, (double)WINDOW->GetHeight() });
-	bottomWall.AddComponents(&br);
-	br.DrawCollider(context, { 0, 0, 0, 1 });
-
-	GameObject a = { "a" };
-	TransformComponent ta;
-	static Vector3D p = {};
-	static Vector3D d = { 1, 1, 1 };
-	ta.setPosition(p += d);
-	CircleCollider ca;
-	ca.setCircle(ta.getPosition().xy, 25);
-
-	a.AddComponents(&ta);
-	a.AddComponents(&ca);
-	Color c_ = { 0,0,0,1 };
-	RENDERER->SetColor(c_);
-	RENDERER->DrawLine({br.top, br.left}, { br.top, br.right }, 2.f);
-
-	if (ca.vs(br.r)) 
-		d = Vector3D::Reflect(d, { br.top, br.right, 0 });
-
-	a.FindComponentByType<CircleCollider>()->DrawCollider(context, { 0, 0, 0, 1 });
+	
 
 	graph->EndDraw();
 
@@ -164,7 +140,7 @@ int Engine::Update(Context& context)
 
 		pSys.second->Update(context);
 	}
-
+	
 	return true;
 }
 int Engine::ShutDown()

@@ -3,6 +3,7 @@
 
 #include "Vector2D.h"
 #include "Circle.h"
+#include "Ray.h"
 
 struct Rect2D
 {
@@ -127,6 +128,11 @@ public:
 	}
 	bool vsCircle(const Vector2D& p, float r) { vsCircle(p, r); }
 	bool vsCircle(float x, float y, float r) { vsCircle({ x, y }, r); }
+
+	bool vsRay(Ray ray)
+	{
+
+	}
 };
 
 inline bool operator== (const Rect2D r1, const Rect2D& r2)

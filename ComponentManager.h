@@ -17,7 +17,7 @@ public:
 	typedef std::vector<RenderComponent*> render_comp_vector;
 	typedef render_comp_vector::iterator render_comp_vector_itr;
 	typedef render_comp_vector::const_iterator render_comp_vector_const_itr;
-
+	
 	comp_vector m_components;
 	render_comp_vector m_renderComponents;
 
