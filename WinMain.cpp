@@ -20,7 +20,7 @@
 	#include "GraphicsDeviceManager.h"
 #endif // !_GRAPHICSDEVICEMANAGER_H
 
-
+#include "Logger.h"
 
 
 #if defined (DEBUG) | defined(_DEBUG)
@@ -29,7 +29,7 @@ int _tmain(int argc, char* argv[])
 	UNREFERENCED_PARAMETER(argc);
 	UNREFERENCED_PARAMETER(argv);
 
-	//Logger::Log("Starting Program");
+	Logger::Log(_T("Starting Program"), LOGTYPE_INFO, false);
 
 	//Run winmain func
 	WinMain((HINSTANCE)GetModuleHandle(NULL), 0, 0, SW_SHOW);

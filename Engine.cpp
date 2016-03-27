@@ -10,6 +10,9 @@
 #include "EngineTimer.h"
 
 #include "GraphicsDeviceManager.h"
+#include "WorldSettings.h"
+
+#include "Logger.h"
 
 #include <iostream>
 
@@ -54,8 +57,8 @@ int Engine::RunLoop()
 		this->Draw(context);
 	}
 
-	//Logger::Log("Ending program");
-	//Logger::WriteLogToFile();
+	Logger::Log(_T("Ending program"), LOGTYPE_INFO, false);
+	Logger::WriteLogFile();
 
 	if (!this->ShutDown()) { return 0; }
 
@@ -77,12 +80,16 @@ int Engine::Intialize()
 {
 	m_EngineState = EngineState::Initializing;
 
+	Singleton<WorldSettings>::CreateInstance();
+
 	Game* game = CreateGame();
 
 	if (!game) { return false; }
 
 	// Add systems
-	if (!AddSystem(new Window(WindowData(640, 480))))
+	if (!AddSystem(new Window(WindowData(Singleton<WorldSettings>::GetInstance()->getWindowWidth(), 
+										 Singleton<WorldSettings>::GetInstance()->getWindowHeight(), 
+										 Singleton<WorldSettings>::GetInstance()->getWindowTitle()))))
 		return false;
 
 	if (!AddSystem(new Graphics(GraphicsData(GetSystem<Window>(SystemType::Sys_Window)))))
@@ -101,9 +108,6 @@ int Engine::Intialize()
 
 	Singleton<GraphicsDeviceManager>::CreateInstance();
 	Singleton<GraphicsDeviceManager>::GetInstance()->SetGraphics(GetSystem<Graphics>(SystemType::Sys_Graphics));
-
-
-	
 
 	return true;
 }
@@ -151,11 +155,13 @@ int Engine::ShutDown()
 	{
 		if (!psys.second->ShutDown())
 		{
-			//Logger::Log("Failed to shutdown systems" + psys->GetSystemType());
+			Logger::Log(_T("Failed to shutdown system: " + psys.second->GetName()), LOGTYPE_WARNING, false);
 			continue;
 		}
 		SafeDelete(psys.second);
 	}
+	Singleton<WorldSettings>::DestoryInstance();
+
 	return true;
 }
 

@@ -6,6 +6,8 @@
 	#include "deletemacros.h"
 #endif
 
+#include "Logger.h"
+
 // Struct
 GraphicsData::GraphicsData(Window* wnd) 
 	: SystemData(_T("Graphics"), SystemType::Sys_Graphics)
@@ -44,7 +46,7 @@ bool Graphics::Initialize()
 	hr = CreateDeviceDependentResoures();
 	if (FAILED(hr)) return false;
 
-	//Logger::Log(_T("Graphics is initialized"), LOGTYPE_INFO, false);
+	Logger::Log(_T("Graphics is initialized"), LOGTYPE_INFO, false);
 	return true;
 }
 

@@ -43,7 +43,7 @@ struct ObjectData {
 // Register type inside typechecker
 #define TYPE_REGISTER(class_type_id)\
 	Singleton<TypeChecker>::GetInstance(true)->AddType(GetID(), _T(#class_type_id))
-// Init class type hardcode methods
+// Init class type hardcoded methods
 #define TYPE_INIT(class_type_id)\
 	virtual std::tstring GetTypeID() const { return _T(#class_type_id); }\
 	static std::tstring GetClassTypeID()  { return _T(#class_type_id); }

@@ -5,6 +5,7 @@
 #include "Graphics.h"
 #include "GraphicsDeviceManager.h"
 #include "Singleton.h"
+#include "Logger.h"
 
 Renderer::Renderer() 
 	: m_InterpolationMode(D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR)
@@ -118,7 +119,7 @@ void Renderer::FillPolygon(Vector2D * points, int size, bool close)
 	hr = Singleton<GraphicsDeviceManager>::GetInstance()->GetGraphics()->GetD2DFactory()->CreatePathGeometry(&pGeometry);
 	if (FAILED(hr)) {
 		SafeRelease(pGeometry);
-		//Logger::Log(_T("Failed to create path geometry"), LOGTYPE_WARNING, false);
+		Logger::Log(_T("Failed to create path geometry"), LOGTYPE_WARNING, false);
 		return;
 	}
 
@@ -128,7 +129,7 @@ void Renderer::FillPolygon(Vector2D * points, int size, bool close)
 	if (FAILED(hr)) {
 		SafeRelease(pGeometrySink);
 		SafeRelease(pGeometry);
-		//Logger::Log(_T("Failed to create geometry sink"), LOGTYPE_WARNING, false);
+		Logger::Log(_T("Failed to create geometry sink"), LOGTYPE_WARNING, false);
 		return;
 	}
 

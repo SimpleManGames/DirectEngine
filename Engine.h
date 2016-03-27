@@ -14,6 +14,8 @@
 	#include "Context.h"
 #endif // !_CONTEXT_H
 
+#include "Logger.h"
+
 //Forward Declaration
 enum SystemType;
 
@@ -62,7 +64,7 @@ private:
 		T* psys = static_cast<T*>(m_mapSystems[systype]);
 		if (!psys)
 		{
-			//Logger::Log("System is not valid")
+			Logger::Log(_T("System is not valid: " + systype), LOGTYPE_WARNING, false);
 			return nullptr;
 		}
 		return psys;

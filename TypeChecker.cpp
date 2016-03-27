@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include "Logger.h"
+
 TypeChecker::TypeChecker()
 	: m_invalidType(_T("INVALID_TYPE"))
 {
@@ -24,7 +26,7 @@ const std::tstring & TypeChecker::getType(int objectID)
 {
 	std::map<int, std::vector<std::tstring>>::iterator it = m_mapTypes.find(objectID);
 	if (it == m_mapTypes.end()) {
-		//Logger::Log("No object has been found");
+		Logger::Log(_T("No object has been found with ID of: " + objectID), LOGTYPE_WARNING, false);
 		return m_invalidType;
 	}
 
@@ -36,12 +38,12 @@ bool TypeChecker::isType(int objectID, const std::tstring & type)
 {
 	std::map<int, std::vector<std::tstring>>::iterator it = m_mapTypes.find(objectID);
 	if (it == m_mapTypes.end()) {
-		//Logger::Log("No object has been found");
+		Logger::Log(_T("No object has been found with type: " + type), LOGTYPE_WARNING, false);
 		return false;
 	}
 
 	if (!TypeExists(type, false)) {
-		//Logger::Log("No object has been found");
+		Logger::Log(_T("No object has been found with type: " + type), LOGTYPE_WARNING, false);
 		return false;
 	}
 
@@ -56,13 +58,13 @@ bool TypeChecker::isType(const std::tstring & type, const std::tstring & isType)
 
 	if (!TypeExists(type, itmap_from))
 	{
-		//Logger::Log("No object has been found");
+		Logger::Log(_T("No object has been found with type: " + type + _T(" and type: ") + isType), LOGTYPE_WARNING, false);
 		return false;
 	}
 
 	if (!TypeExists(type, itmap_to, false))
 	{
-		//Logger::Log("No object has been found");
+		Logger::Log(_T("No object has been found with type: " + type + _T(" and type: ") + isType), LOGTYPE_WARNING, false);
 		return false;
 	}
 
@@ -74,12 +76,12 @@ bool TypeChecker::isA(int objectID, const std::tstring & type)
 {
 	std::map<int, std::vector<std::tstring>>::iterator it = m_mapTypes.find(objectID);
 	if (it == m_mapTypes.end()) {
-		//Logger::Log("No object has been found");
+		Logger::Log(_T("No object has been found with type: " + type), LOGTYPE_WARNING, false);
 		return false;
 	}
 
 	if (!TypeExists(type)) {
-		//Logger::Log("No object has been found");
+		Logger::Log(_T("No object has been found with type: " + type), LOGTYPE_WARNING, false);
 		return false;
 	}
 
@@ -94,13 +96,13 @@ bool TypeChecker::isA(const std::tstring & type, const std::tstring & isType)
 
 	if (!TypeExists(type, itmap_from))
 	{
-		//Logger::Log("No object has been found");
+		Logger::Log(_T("No object has been found with type: " + type + _T(" and type: ") + isType), LOGTYPE_WARNING, false);
 		return false;
 	}
 
 	if (!TypeExists(type, itmap_to, false))
 	{
-		//Logger::Log("No object has been found");
+		Logger::Log(_T("No object has been found with type: " + type + _T(" and type: ") + isType), LOGTYPE_WARNING, false);
 		return false;
 	}
 

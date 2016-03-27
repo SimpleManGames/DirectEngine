@@ -61,6 +61,18 @@
     <Filter Include="Header Files\Helpers">
       <UniqueIdentifier>{00abc29f-4da7-400e-9df7-80dc2e1bc921}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Systems\GameLogic">
+      <UniqueIdentifier>{4ee3fbc3-dbad-40d6-a4d3-1e359a2adb5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Debug">
+      <UniqueIdentifier>{89804690-df78-4cb5-b574-3ae570cf9a8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SceneGraph\Scene">
+      <UniqueIdentifier>{2186eaad-4f81-4bc7-ad25-547eeebb035d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helpers\Factory">
+      <UniqueIdentifier>{056ec4d6-8562-4053-92e6-f3e89f7e22d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -158,6 +170,21 @@
     </ClCompile>
     <ClCompile Include="Quaternion.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
+      <Filter>Header Files\Core\Systems\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Header Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldSettings.cpp">
+      <Filter>Header Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Header Files\SceneGraph\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneFactory.cpp">
+      <Filter>Header Files\Helpers\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +313,27 @@
     </ClInclude>
     <ClInclude Include="MathHelper.h">
       <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic.h">
+      <Filter>Header Files\Core\Systems\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Header Files\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldSettings.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="fstream.h">
+      <Filter>Header Files\Define</Filter>
+    </ClInclude>
+    <ClInclude Include="stringstream.h">
+      <Filter>Header Files\Define</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files\SceneGraph\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneFactory.h">
+      <Filter>Header Files\Helpers\Factory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
