@@ -48,7 +48,7 @@ public:
 	static EngineState GetEngineState() { return m_EngineState; }
 
 private:
-	int Intialize();
+	int Initialize();
 	int Draw(Context& context);
 	int Update(Context& context);
 	int ShutDown();
@@ -61,12 +61,16 @@ private:
 	template<typename T>
 	T* GetSystem(SystemType systype)
 	{
+		// Create a template pointer and set it as the type we pass in
 		T* psys = static_cast<T*>(m_mapSystems[systype]);
+		// If failed
 		if (!psys)
 		{
+			// Report to the user
 			Logger::Log(_T("System is not valid: " + systype), LOGTYPE_WARNING, false);
 			return nullptr;
 		}
+		// else return the system
 		return psys;
 	}
 

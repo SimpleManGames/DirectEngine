@@ -17,7 +17,6 @@ SceneManager::SceneManager()
 
 }
 
-
 SceneManager::~SceneManager() { }
 
 bool SceneManager::Initialize()
@@ -25,12 +24,19 @@ bool SceneManager::Initialize()
 	if(m_pActiveScene)
 		if (!m_pActiveScene->IsInitialized())
 		{
+#if defined (DEBUG) | (_DEBUG)
 			if (!m_pActiveScene->Initialize())
 				return false;
 			m_pActiveScene->SetInitialized();
 			if (!m_pActiveScene->PostInitialize())
 				return false;
 			m_pActiveScene->SetPostInitialized();
+#else
+			m_pActiveScene->Initialize();
+			m_pActiveScene->SetInitialized();
+			m_pActiveScene->PostInitialize();
+			m_pActiveScene->SetPostInitialized();
+#endif
 		}
 
 	return true;
@@ -41,12 +47,19 @@ bool SceneManager::LoadContent()
 	if (m_pActiveScene)
 		if (!m_pActiveScene->IsContentLoaded())
 		{
+#if defined (DEBUG) | (_DEBUG)
 			if (!m_pActiveScene->LoadContent())
 				return false;
 			m_pActiveScene->SetContentLoaded();
 			if (!m_pActiveScene->PostLoadContent())
 				return false;
 			m_pActiveScene->SetPostContentLoaded();
+#else
+			m_pActiveScene->LoadContent();
+			m_pActiveScene->SetContentLoaded();
+			m_pActiveScene->PostLoadContent();
+			m_pActiveScene->SetPostContentLoaded();
+#endif
 		}
 
 	return true;
@@ -57,7 +70,7 @@ bool SceneManager::Update(Context & context)
 	if (m_pActiveScene)
 	{
 		if (!m_pActiveScene->IsContructed())
-			return true;
+			return false;
 
 		return m_pActiveScene->Update(context);
 	}
@@ -71,11 +84,15 @@ bool SceneManager::Draw(Context & context)
 	{
 		if (!m_pActiveScene->IsContructed())
 			return true;
-
+#if defined (DEBUG) | (_DEBUG)
 		if (!m_pActiveScene->Draw(context))
 			return false;
 		if (!m_pActiveScene->DrawUI(context))
 			return false;
+#else
+		m_pActiveScene->Draw(context);
+		m_pActiveScene->DrawUI(context);
+#endif
 	}
 
 	return true;
