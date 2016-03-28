@@ -6,21 +6,26 @@
 
 #include "deletemacros.h"
 
+// Default constructor for Game Logic Data
 GameLogicData::GameLogicData()
 	: SystemData(_T("GameLogic"), SystemType::Sys_Logic)
 {
 }
 
+// Constructor for Game Logic
+// Takes in a ref to Game Logic Data
 GameLogic::GameLogic(const GameLogicData & data)
 	: System(data)
 {
 	TYPE_REGISTER(GameLogic);
 }
 
+// Destructor for Game Logic
 GameLogic::~GameLogic()
 {
 }
 
+// Initialition of the Game Logic class
 bool GameLogic::Initialize()
 {
 	System::Initialize();
@@ -43,6 +48,8 @@ bool GameLogic::Initialize()
 	return true;
 }
 
+// Updates the game logic
+// Takes in the current context
 bool GameLogic::Update(Context & context)
 {
 	System::Update(context);
@@ -57,6 +64,8 @@ bool GameLogic::Update(Context & context)
 	return true;
 }
 
+// Draws the game logic
+// Takes in the current context
 bool GameLogic::Draw(Context & context)
 {
 	System::Draw(context);

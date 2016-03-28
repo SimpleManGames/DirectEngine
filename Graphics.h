@@ -24,7 +24,7 @@ public:
 	/// Construtors & Deconstrutors
 
 	// GraphicsData Construtor
-	// param: wnd = The current window, sets pWnd, default value is nullptr
+	//Takes the current window, sets pWnd, default value is nullptr
 	GraphicsData(Window* wnd = nullptr);
 
 	/// Variables

@@ -9,6 +9,9 @@
 #include "Logger.h"
 
 // Struct
+
+// Constructor for Graphics Data
+// Takes in a pointer to a window
 GraphicsData::GraphicsData(Window* wnd) 
 	: SystemData(_T("Graphics"), SystemType::Sys_Graphics)
 	, pWnd(wnd) 
@@ -17,6 +20,9 @@ GraphicsData::GraphicsData(Window* wnd)
 }
 
 // Class Graphics
+
+// Constructor for graphics
+// Take a ref to Graphics Data
 Graphics::Graphics(const GraphicsData& data) 
 	: System(data)
 	, m_pRenderTarget(nullptr)
@@ -28,15 +34,17 @@ Graphics::Graphics(const GraphicsData& data)
 
 }
 
-// Deconstructor
+// Deconstructor for Graphics class
 Graphics::~Graphics() { }
 
 // Resizes the current RenderTargets window
+// Takes in the new width and height
 HRESULT Graphics::OnResize(UINT width, UINT height) { return (m_pRenderTarget) ? m_pRenderTarget->Resize(D2D1::SizeU(width, height)) : S_FALSE; }
 
 // Init the graphics
 bool Graphics::Initialize() 
 {
+	// Init the system
 	System::Initialize();
 
 	// Call CreateDeviceIndependentResources to init the default values
@@ -53,6 +61,7 @@ bool Graphics::Initialize()
 // Shut down the graphics
 bool Graphics::ShutDown() 
 {
+	// Shut down the system
 	System::ShutDown();
 
 	SafeRelease(m_pD2DFactory);

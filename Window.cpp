@@ -2,6 +2,8 @@
 
 #include "Logger.h"
 
+// Default constructor for WindowData
+// Sets the default values for SystemData
 WindowData::WindowData()
 	:SystemData(_T(""), SystemType::Sys_Invalid)
 	, width(-1)
@@ -12,6 +14,9 @@ WindowData::WindowData()
 {
 
 }
+
+// Window Data constructor
+// Takes in a width, height, title, bits, and if its fullscreen
 WindowData::WindowData(int w, int h, const std::tstring& title, int b, bool fs)
 	:SystemData(_T("Window"), SystemType::Sys_Window)
 	, width(w)
@@ -23,6 +28,8 @@ WindowData::WindowData(int w, int h, const std::tstring& title, int b, bool fs)
 
 }
 
+// Default constructor for ResizeData
+// Sets values to default
 ResizeData::ResizeData()
 	: mustResize(false)
 	, newWidth(-1)
@@ -30,6 +37,9 @@ ResizeData::ResizeData()
 {
 
 }
+
+// Constructor for ResizeData
+// Takes in a bool for if you want to resize, a new width and a new height
 ResizeData::ResizeData(bool resize, int nw, int nh)
 	: mustResize(resize)
 	, newWidth(nw)
@@ -57,8 +67,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lparam)
 
 	return DefWindowProc(hWnd, msg, wparam, lparam);
 }
+// Returns the width of the window
 int Window::GetWidth() { return m_Width; }
+// Returns the height of the window
 int Window::GetHeight() { return m_Height; }
+
 LRESULT Window::HandleEvent(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
 	switch (msg)
@@ -98,6 +111,8 @@ LRESULT Window::HandleEvent(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lparam)
 	return DefWindowProc(hWnd, msg, wparam, lparam);
 }
 
+// Window constructor
+// Takes a ref to WindowData
 Window::Window(const WindowData& data)
 	:System(data)
 	, m_hWindow(NULL)
@@ -115,13 +130,17 @@ Window::Window(const WindowData& data)
 	, m_ResizeData()
 {
 }
+
+// Default Destructor for window
 Window::~Window()
 {
 	// TO DO: Deconstrutor
 }
 
+// Initialization for Window
 bool Window::Initialize()
 {
+	// Init the System
 	System::Initialize();
 
 	unsigned int pixelFormat;           // Holds The Results After Searching For A Match
@@ -173,7 +192,7 @@ bool Window::Initialize()
 
 			dwExStyle = WS_EX_APPWINDOW;    // Window Extended Style
 			dwStyle = WS_POPUP;             // Windows Style
-											//ShowCursor(FALSE);            // Hide Mouse Pointer (Optional)
+			ShowCursor(TRUE);				// Hide Mouse Pointer (Optional)
 		}
 	}
 	else

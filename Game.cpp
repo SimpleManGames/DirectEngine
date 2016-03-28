@@ -19,6 +19,7 @@ GameData::GameData()
 }
 
 // Game Data Construtor
+// Takes in a tstring and sets the name of the system to it
 GameData::GameData(const std::tstring & name)
 	: SystemData(name, SystemType::Sys_Game)
 {
