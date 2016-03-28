@@ -1,20 +1,17 @@
 #include "Engine.h"
 
 #include "Renderer.h"
-
 #include "System.h"
 #include "Game.h"
 #include "Window.h"
 #include "Graphics.h"
-
+#include "GameLogic.h"
 #include "EngineTimer.h"
 
 #include "GraphicsDeviceManager.h"
 #include "WorldSettings.h"
 
 #include "Logger.h"
-
-#include <iostream>
 
 #ifndef _DELETEMACRO_H
 	#include "deletemacros.h"
@@ -65,16 +62,6 @@ int Engine::RunLoop()
 	return (int)msg.wParam;
 }
 
-#include "Circle.h"
-#include "Rect2D.h"
-#include "GameObject.h"
-#include "TransformComponent.h"
-#include "CircleCollider.h"
-#include "RectCollider.h"
-#include "Collision.h"
-#include "PhysicsComponent.h"
-#include "ComponentManager.h"
-
 //Private Methods
 int Engine::Intialize()
 {
@@ -87,24 +74,73 @@ int Engine::Intialize()
 	if (!game) { return false; }
 
 	// Add systems
-	if (!AddSystem(new Window(WindowData(Singleton<WorldSettings>::GetInstance()->getWindowWidth(), 
-										 Singleton<WorldSettings>::GetInstance()->getWindowHeight(), 
-										 Singleton<WorldSettings>::GetInstance()->getWindowTitle()))))
-		return false;
 
+	// Adding the Window system
+#if defined(DEBUG) | defined(_DEBUG)
+	if (!AddSystem(new Window(WindowData(Singleton<WorldSettings>::GetInstance()->getWindowWidth(),
+		Singleton<WorldSettings>::GetInstance()->getWindowHeight(),
+		Singleton<WorldSettings>::GetInstance()->getWindowTitle()))))
+		return false;
+#else
+	AddSystem(new Window(WindowData(Singleton<WorldSettings>::GetInstance()->getWindowWidth(),
+		Singleton<WorldSettings>::GetInstance()->getWindowHeight(),
+		Singleton<WorldSettings>::GetInstance()->getWindowTitle())));
+#endif
+	// Adding the Graphics system
+#if defined(DEBUG) | defined(_DEBUG)
 	if (!AddSystem(new Graphics(GraphicsData(GetSystem<Window>(SystemType::Sys_Window)))))
 		return false;
-
+#else
+	AddSystem(new Graphics(GraphicsData(GetSystem<Window>(SystemType::Sys_Window))));
+#endif
+	// Adding the Engine Timer system
+#if defined(DEBUG) | defined(_DEBUG)
 	if (!AddSystem(new EngineTimer(EngineTimerData())))
 		return false;
+#else
+	AddSystem(new EngineTimer(EngineTimerData()));
+#endif
+	// Adding the Game Logic Data system
+#if defined(DEBUG) | defined(_DEBUG)
+	if (!AddSystem(new GameLogic(GameLogicData())))
+		return false;
+#else
+	AddSystem(new GameLogic(GameLogicData()));
+#endif
 
 	// Initialize the system
+
+	// Window Init Block
+#if defined(DEBUG) | defined(_DEBUG)
 	if (!m_mapSystems[SystemType::Sys_Window]->Initialize())
 		return false;
-	if (!m_mapSystems[SystemType::Sys_Graphics]->Initialize())
-		return false;
-	if (!m_mapSystems[SystemType::Sys_EngineTimer]->Initialize())
-		return false;
+#else
+	m_mapSystems[SystemType::Sys_Window]->Initialize();
+#endif
+
+		// Graphics Init Block
+#if defined(DEBUG) | defined(_DEBUG)
+		if (!m_mapSystems[SystemType::Sys_Graphics]->Initialize())
+			return false;
+#else
+	m_mapSystems[SystemType::Sys_Graphics]->Initialize();
+#endif
+
+		// Engine Timer Init Block
+#if defined(DEBUG) | defined(_DEBUG)
+		if (!m_mapSystems[SystemType::Sys_EngineTimer]->Initialize())
+			return false;
+#else
+	m_mapSystems[SystemType::Sys_EngineTimer]->Initialize();
+#endif
+
+		// Game Logic Init Block
+#if defined(DEBUG) | defined(_DEBUG)
+		if (!m_mapSystems[SystemType::Sys_Logic]->Initialize())
+			return false;
+#else
+	m_mapSystems[SystemType::Sys_Logic]->Initialize();
+#endif
 
 	Singleton<GraphicsDeviceManager>::CreateInstance();
 	Singleton<GraphicsDeviceManager>::GetInstance()->SetGraphics(GetSystem<Graphics>(SystemType::Sys_Graphics));
@@ -112,25 +148,19 @@ int Engine::Intialize()
 	return true;
 }
 
-
-
 int Engine::Draw(Context& context)
 {
 	Graphics* graph = GetSystem<Graphics>(SystemType::Sys_Graphics);
 	if (graph == nullptr) return false;
 
+	GameLogic* logic = GetSystem<GameLogic>(SystemType::Sys_Logic);
+	if (logic == nullptr)
+		return false;
+
 	graph->BeginDraw();
 
-	// Draw Game
-
-	Ray ray(100, 100, 200, 200, 5);
-	Rect2D rect(100, 150, 200, 250);
-
-	RENDERER->DrawLine(ray.pos, ray.dir, 5.f);
-	RENDERER->DrawRect(rect, 5.f);
-
+	logic->Draw(context);
 	
-
 	graph->EndDraw();
 
 	return true;

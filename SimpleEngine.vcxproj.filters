@@ -186,6 +186,9 @@
     <ClCompile Include="SceneFactory.cpp">
       <Filter>Header Files\Helpers\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Header Files\SceneGraph\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinMain.h">
@@ -334,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="SceneFactory.h">
       <Filter>Header Files\Helpers\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files\SceneGraph\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -24,9 +24,9 @@ bool EngineTimer::Initialize()
 		//return false;
 	//m_pWorldTimer->SetPostInitialized();
 #else
-	m_pWorldTimer->Initialize();
+	//m_pWorldTimer->Initialize();
 	//m_pWorldTimer->SetInitialized();
-	m_pWorldTimer->PostInitialized();
+	//m_pWorldTimer->PostInitialized();
 	//m_pWorldTimer->SetPostInitialized();
 #endif
 

@@ -155,6 +155,7 @@
     <ClInclude Include="RectCollider.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Singleton.h" />
@@ -196,6 +197,7 @@
     <ClCompile Include="RectCollider.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Singleton.cpp" />
